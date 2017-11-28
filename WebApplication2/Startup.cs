@@ -13,6 +13,7 @@ using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Services;
 using Microsoft.AspNetCore.Identity;
+using System.Text.Encodings.Web;
 
 namespace WebApplication2
 {
@@ -49,7 +50,8 @@ namespace WebApplication2
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
+            services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[]{ System.Text.Unicode.UnicodeRanges.BasicLatin,
+System.Text.Unicode.UnicodeRanges.Cyrillic}));
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -88,7 +90,7 @@ namespace WebApplication2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Login}/{id?}");
             });
         }
         private async Task ConfigureIdentity(IServiceScope scope)

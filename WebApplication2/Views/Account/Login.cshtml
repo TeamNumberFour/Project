@@ -7,8 +7,19 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<link rel="stylesheet" href="~/css/site.min.css" />
 
-<h2>@ViewData["Title"].</h2>
+<div>
+    <div class="wrapper">
+        <form class="form" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <input asp-for="Username" class="form__login" type="text" autofocus="autofocus" placeholder="Login">
+            <input asp-for="Password" class="form__password" type="password" placeholder="Password">
+            <button class="form__button" type="submit" class="btn btn-default">Вход</button>
+        </form>
+        <div class="sign">@@Denchick team</div>
+    </div>
+</div>
+@*
 <div class="row">
     <div class="col-md-8">
         <section>
@@ -90,3 +101,4 @@
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
+*@
