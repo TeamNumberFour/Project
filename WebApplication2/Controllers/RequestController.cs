@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebApplication2.Models;
+using WebApplication2.Models.Requests;
 using WebApplication2.Data;
 using WebApplication2.Models.AccountViewModels;
 using WebApplication2.Services;
@@ -27,6 +28,7 @@ namespace WebApplication2.Controllers
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
         private readonly ApplicationDbContext context;
+        private readonly IParsingService parsingService;
 
         public RequestController(
             UserManager<ApplicationUser> userManager,
@@ -35,7 +37,8 @@ namespace WebApplication2.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IParsingService parsingService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,6 +47,7 @@ namespace WebApplication2.Controllers
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             this.context = context;
+            this.parsingService = parsingService;
         }
 
 
@@ -51,20 +55,20 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public async Task<IActionResult> Choose()
         {
-            var items = await this.context.Universities
-                .Include(p => p.Faculties)
-                .ToListAsync();
-            return this.View(items);
+  
+           
+            return this.View();
         }
 
 
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Choose()
+        public async Task<IActionResult> Choose(Choose model)
         {
+            Post[] posts = parsingService.Gazeta(model.University, "15.11.17","");
 
 
-
+                 return this.View();
         }
 
     */

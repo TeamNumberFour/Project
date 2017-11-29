@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication2.Models.RequestViewModels
+namespace WebApplication2.Models.Requests
 {
-    public class Choose
+    public class Choose     
     {
         [Required]
         public String University { get; set; }

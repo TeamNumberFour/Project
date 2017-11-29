@@ -4,11 +4,12 @@
    
 @inject UserManager<ApplicationUser> UserManager
         
-@model IEnumerable<WebApplication2.Models.University>
-            @{
-                ViewData["Title"] = "Choose";
-            }
-
+@*@model IEnumerable<WebApplication2.Models.University>
+    @{
+        ViewData["Title"] = "Choose";
+    }             *@
+ @model  WebApplication2.Models.Requests.Choose
+@{ViewData["Title"] = "Choose";      }
 
         <div class="wrapper">
             <div class="menu">
@@ -33,12 +34,12 @@
                     </ul>
                 </form>
             </div>
-            <form class="form" action="">
+            <form class="form" asp-action="">
                 <div class="choice">
-                    <input autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
+                    <input name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
                     <datalist id="univer-list">
-                       @foreach (var item in Model)
-                        {<option>@Html.DisplayFor(modelItem => item.Title)</option>}
+                       @*@foreach (var item in Model)
+    {<option>@Html.DisplayFor(modelItem => item.Title)</option>}*@
                     </datalist>
                     <input class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
                     <datalist id="faculty-list">
@@ -54,6 +55,6 @@
                     </datalist>
                 </div>
                 
-                <a href="../3/index4.html" class="form__search">Find</a>
+                <button href=""type="submit" class="form__search">Find</button>
             </form>
         </div>
