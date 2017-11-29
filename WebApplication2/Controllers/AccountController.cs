@@ -74,7 +74,7 @@ namespace WebApplication2.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Choose", "Request");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -128,7 +128,7 @@ namespace WebApplication2.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "ApplicationUsers");
                 }
                 AddErrors(result);
             }
@@ -145,7 +145,7 @@ namespace WebApplication2.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

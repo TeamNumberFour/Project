@@ -58,8 +58,16 @@ namespace WebApplication2.Controllers
         }
 
 
-           
-        
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Choose()
+        {
+
+
+
+        }
+
+    */
 
 
     }
