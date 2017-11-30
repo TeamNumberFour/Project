@@ -116,7 +116,7 @@ namespace WebApplication2.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username};
+                var user = new ApplicationUser { UserName = model.Username, Password=model.Password};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
