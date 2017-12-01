@@ -9,8 +9,8 @@
 }
 <link rel="stylesheet" href="~/css/site.min.css" />
 
-<div>
-    <div class="wrapper">
+<div class="bg-blue">
+    <div class="main-wrapper">
         <form class="form" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
             <input asp-for="Username" class="form__login" type="text" autofocus="autofocus" placeholder="Login">
             <input asp-for="Password" class="form__password" type="password" placeholder="Password">

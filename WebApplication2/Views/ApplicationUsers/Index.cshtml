@@ -4,7 +4,7 @@
     ViewData["Title"] = "Users";
 }
 <div class="bg-blue">
-    <div class="wrapper">
+    <div class="main-wrapper">
         <div class="menu">
             <ul class="menu__list-left">
                 <li class="bg">
@@ -25,9 +25,9 @@
         </div>
         <div class="overlay"></div>
         <div class="content">
-            <div class="create" asp-area="" asp-controller="Account"asp-action="Register">Create</div>
+            <a class="create" asp-area="" asp-controller="Account"asp-action="Register">Create</a>
             @{int i = 0; }
-            @foreach (var item in Model)
+            @foreach (var item in Model.OrderBy(x => x.UserName))
             {@if (!(item.UserName == "admin"))
             {
             <div class="user-item">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="remake">
                         <a class="user__update" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="user__delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <form asp-action="Delete" asp-route-id="@item.Id"><input class="user__delete" type="submit" value="Delete" />  </form>
                     </div>
                 </div>
             </div>}
@@ -50,43 +50,3 @@
 </div>
 
 
-@*<p>
-    <a asp-area="" asp-controller="Account"asp-action="Register">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                
-                
-                
-                
-              
-                
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-
-
-
-
-
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@

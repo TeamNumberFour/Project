@@ -10,51 +10,52 @@
     }             *@
  @model  WebApplication2.Models.Requests.Choose
 @{ViewData["Title"] = "Choose";      }
-
-        <div class="wrapper">
-            <div class="menu">
-                <ul class="menu__list-left">
-                    <li class="bg">
-                        <div class="bg__common bg-red"></div>
-                        <div class="bg__common bg-grey"></div>
-                        <div class="bg__common bg-green"></div>
-                    </li>
-@if (User.IsInRole(ApplicationRoles.Administrators))
-{
+<div class="bg-blue">
+    <div class="main-wrapper">
+        <div class="menu">
+            <ul class="menu__list-left">
+                <li class="bg">
+                    <div class="bg__common bg-red"></div>
+                    <div class="bg__common bg-grey"></div>
+                    <div class="bg__common bg-green"></div>
+                </li>
+                @if (User.IsInRole(ApplicationRoles.Administrators))
+                {
                     <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>}
+            </ul>
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                <ul class="menu__list">
+                    <li class="menu__login">@UserManager.GetUserName(User)</li>
+                    <li class="menu__exit">
+                        <button type="submit" class="menu__exit-link">
+                            Log out
+                        </button>
+                    </li>
                 </ul>
-                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-                    <ul class="menu__list">
-                        <li class="menu__login">@UserManager.GetUserName(User)</li>
-                        <li class="menu__exit">
-                            <button type="submit" class="menu__exit-link">
-                                Log out
-                            </button>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-            <form class="form" asp-action="">
-                <div class="choice">
-                    <input name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
-                    <datalist id="univer-list">
-                       @*@foreach (var item in Model)
-    {<option>@Html.DisplayFor(modelItem => item.Title)</option>}*@
-                    </datalist>
-                    <input class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
-                    <datalist id="faculty-list">
-   
-    <option>Институт военного образования</option>
-    <option>Исторический факультет</option>
-    <option>Радиофизический факультет</option>
-    <option>Факультет журналистики</option>
-    <option>Факультет информатики</option>
-    <option>Факультет психологии</option>
-    <option>Химический факультет</option>
-    <option>Юридический институт</option>
-                    </datalist>
-                </div>
-                
-                <button href=""type="submit" class="form__search">Find</button>
             </form>
         </div>
+        <form class="form" asp-action="">
+            <div class="choice">
+                <input name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
+                <datalist id="univer-list">
+                    @*@foreach (var item in Model)
+                        {<option>@Html.DisplayFor(modelItem => item.Title)</option>}*@
+                </datalist>
+                <input class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
+                <datalist id="faculty-list">
+
+                    <option>Институт военного образования</option>
+                    <option>Исторический факультет</option>
+                    <option>Радиофизический факультет</option>
+                    <option>Факультет журналистики</option>
+                    <option>Факультет информатики</option>
+                    <option>Факультет психологии</option>
+                    <option>Химический факультет</option>
+                    <option>Юридический институт</option>
+                </datalist>
+            </div>
+
+            <button href="" type="submit" class="form__search">Find</button>
+        </form>
+    </div>
+</div>
