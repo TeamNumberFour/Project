@@ -4,7 +4,7 @@
     ViewData["Title"] = "Universities";
 }
 <div class="bg-blue">
-    <div class="main-wrapper">
+    <div class="wrapper">
         <div class="menu">
             <ul class="menu__list-left">
                 <li class="bg">
@@ -25,7 +25,7 @@
         </div>
         <div class="overlay"></div>
         <div class="content">
-            <a class="create" asp-area="" asp-controller="Universities" asp-action="Create">Create</a>
+            <a class="create" asp-area="" asp-controller="Universities" asp-action="Create">Create</>
             @{int i = 0; }
             @foreach (var item in Model.OrderBy(x => x.Title))
             {
