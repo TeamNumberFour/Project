@@ -55,9 +55,20 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public async Task<IActionResult> Choose()
         {
-  
-           
-            return this.View();
+            var Univer = await this.context.Universities.ToListAsync();
+                
+
+
+
+            var model = new Choose
+            {
+                Universities = (ICollection<University>)Univer
+                
+            };
+
+            return this.View(model);
+
+            
         }
 
 

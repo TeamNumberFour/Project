@@ -11,5 +11,6 @@ namespace WebApplication2.Models.Requests
         [Required]
         public String University { get; set; }
         public String Faculty { get; set; }
+        public ICollection<University> Universities { get; set; }
     }
 }

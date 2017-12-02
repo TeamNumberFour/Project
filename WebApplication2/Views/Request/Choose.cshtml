@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Identity
-@using WebApplication2.Models
+@model WebApplication2.Models.Requests.Choose
 @inject SignInManager<ApplicationUser> SignInManager
    
 @inject UserManager<ApplicationUser> UserManager
@@ -8,7 +8,7 @@
     @{
         ViewData["Title"] = "Choose";
     }             *@
- @model  WebApplication2.Models.Requests.Choose
+
 @{ViewData["Title"] = "Choose";      }
 <div class="bg-blue">
     <div class="main-wrapper">
@@ -38,8 +38,8 @@
             <div class="choice">
                 <input name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
                 <datalist id="univer-list">
-                    @*@foreach (var item in Model)
-                        {<option>@Html.DisplayFor(modelItem => item.Title)</option>}*@
+                    @foreach (var item in Model.Universities)
+                        {<option>@Html.DisplayFor(modelItem => item.Title)</option>}
                 </datalist>
                 <input class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
                 <datalist id="faculty-list">
