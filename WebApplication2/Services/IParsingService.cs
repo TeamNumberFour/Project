@@ -8,7 +8,7 @@ namespace WebApplication2.Services
 {
     public interface IParsingService
     {
-         Post[] Gazeta(string req, string from, string to);
+         void Gazeta(string req, string from, string to);
 
     }
 }

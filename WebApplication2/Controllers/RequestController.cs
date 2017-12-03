@@ -76,10 +76,15 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Choose(Choose model)
         {
-            Post[] posts = parsingService.Gazeta(model.University, "15.11.17","");
+            parsingService.Gazeta(model.University, "15.11.17", "");
 
 
-                 return this.View();
+            return this.View("Blacklist", new List
+                 {
+                     University=model.University,
+                     Faculty=model.Faculty,
+                     Query=model.University+" "+model.Faculty
+                 });
         }
 
     

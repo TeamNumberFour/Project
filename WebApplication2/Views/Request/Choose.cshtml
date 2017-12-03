@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Identity
 @model WebApplication2.Models.Requests.Choose
 @inject SignInManager<ApplicationUser> SignInManager
-   
+<script src="~/js/common.js"></script>   
 @inject UserManager<ApplicationUser> UserManager
         
 @*@model IEnumerable<WebApplication2.Models.University>
@@ -34,14 +34,14 @@
                 </ul>
             </form>
         </div>
-        <form class="form" asp-action="">
+        <form class="form" asp-action="Choose">
             <div class="choice">
-                <input name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
+                <input asp-for="University" name="VUZ" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
                 <datalist id="univer-list">
                     @foreach (var item in Model.Universities)
                         {<option>@Html.DisplayFor(modelItem => item.Title)</option>}
                 </datalist>
-                <input class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
+                <input asp-for="Faculty" class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
                 <datalist id="faculty-list">
 
                     <option>Институт военного образования</option>
@@ -55,7 +55,7 @@
                 </datalist>
             </div>
 
-            <button href="" type="submit" class="form__search">Find</button>
+            <button  class="form__search">Find</button>
         </form>
     </div>
 </div>

@@ -16,23 +16,19 @@ namespace WebApplication2.Services
 {
     public class ParsingService: IParsingService
     {
-       public  Post[] Gazeta(string req, string from, string to)
+       public async void Gazeta(string req, string from, string to)
         {
             var str = "";
 
             List<Post> posts = new List<Post>();
             using (HttpClient client = new HttpClient())
             {
-                using (IDisposable result =   (IDisposable)client.GetStringAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + req + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8"))
-                {
-
+                var result = await client.GetByteArrayAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + req + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8");
+                Task.WaitAll();
                     str = result.ToString();
-                    
-
-                }
-                
-
+            
             }
+            
             string pattern = @"pubdate=.(.{10})[\s\S]{0,100} 5px;..\n\<a href=.(/\w+/news/.{0,50}shtml)[\s\S]{0,20}\>\n([\s\S]{0,300})\n\</a\>\n\</h2>([\s\S]{0,4000} s_author_name..(.{0,50})..span)?";
             Regex rgx = new Regex(pattern);
 
@@ -51,7 +47,7 @@ namespace WebApplication2.Services
 
                 posts.Add(post);
             }
-            return posts.ToArray();
+            //return posts.ToArray();
         }
     }
     }
