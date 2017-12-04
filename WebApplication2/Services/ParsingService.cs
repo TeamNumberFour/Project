@@ -23,7 +23,7 @@ namespace WebApplication2.Services
             List<Post> posts = new List<Post>();
             using (HttpClient client = new HttpClient())
             {
-                var result = await client.GetByteArrayAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + req + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8");
+                var result = await client.GetStringAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + req + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8");
                 Task.WaitAll();
                     str = result.ToString();
             

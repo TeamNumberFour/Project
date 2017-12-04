@@ -52,7 +52,7 @@ namespace WebApplication2.Controllers
 
 
 
-        [HttpGet]
+        
         public async Task<IActionResult> Choose()
         {
             var Univer = await this.context.Universities.ToListAsync();
@@ -63,6 +63,7 @@ namespace WebApplication2.Controllers
             var model = new Choose
             {
                 Universities = (ICollection<University>)Univer
+                
                 
             };
 
@@ -76,7 +77,7 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Choose(Choose model)
         {
-            parsingService.Gazeta(model.University, "15.11.17", "");
+            parsingService.Gazeta(model.University, DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
 
 
             return this.View("Blacklist", new List

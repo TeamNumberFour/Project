@@ -17,7 +17,9 @@
                 </li>
                 @if (User.IsInRole(ApplicationRoles.Administrators))
                 {
-                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>}
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
+                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>
+                }
             </ul>
             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                 <ul class="menu__list-right">
@@ -41,10 +43,10 @@
                         <div class="instagram">Insta</div>
                     </div>
                     <ul class="source">
-                        <li class="source__item">Вк: <div class="percent percent-vk">53% <span class="count">(492 чел.)</span></div></li>
-                        <li class="source__item">Facebook: <div class="percent percent-fb">27% <span class="count">(251 чел.)</span></div></li>
-                        <li class="source__item">Instagram: <div class="percent percent-inst">12% <span class="count">(111 чел.)</span></div></li>
-                        <li class="source__item">Twitter: <div class="percent percent-twitter">8% <span class="count">(72 чел.)</span></div></li>
+                        <li class="source__item">VK: <div class="percent percent-vk">53% <span class="count">(492 com.)</span></div></li>
+                        <li class="source__item">Facebook: <div class="percent percent-fb">27% <span class="count">(251 com.)</span></div></li>
+                        <li class="source__item">Instagram: <div class="percent percent-inst">12% <span class="count">(111 com.)</span></div></li>
+                        <li class="source__item">Twitter: <div class="percent percent-twitter">8% <span class="count">(72 com.)</span></div></li>
                     </ul>
                     <div class="diagr">
                         <img src="~/images/diagram2.png" alt="">
@@ -54,10 +56,10 @@
                         <div class="uncertain"><>	</div>
                     </div>
                     <ul class="emotion-color">
-                        <li class="ec__item">Негативных: <div class="percent percent-negative">35% <span class="count">(324)</span></div></li>
-                        <li class="ec__item">Нейтральных: <div class="percent percent-neutral">28% <span class="count">(260)</span></div></li>
-                        <li class="ec__item">Позитивных: <div class="percent percent-positive">27% <span class="count">(251)</span></div></li>
-                        <li class="ec__item">Неопределенных: <div class="percent percent-uncertain">12% <span class="count">(111)</span></div></li>
+                        <li class="ec__item">Negative: <div class="percent percent-negative">35% <span class="count">(324)</span></div></li>
+                        <li class="ec__item">Neutral: <div class="percent percent-neutral">28% <span class="count">(260)</span></div></li>
+                        <li class="ec__item">Positive: <div class="percent percent-positive">27% <span class="count">(251)</span></div></li>
+                        <li class="ec__item">Undefined: <div class="percent percent-uncertain">12% <span class="count">(111)</span></div></li>
                     </ul>
                 </div>
                 <ul class="list">
@@ -170,8 +172,8 @@
                     </li>
                 </ul>
                 <div class="footer-buttons">
-                    <div class="fbutton export">Экспорт в файл</div>
-                    <a href="index3.html" class="fbutton again">Начать заново</a>
+                    <div class="fbutton export">Export</div>
+                    <a asp-area="" asp-controller="Request" asp-action="Choose" class="fbutton again">Start over</a>
                 </div>
             </div>
             <div class="arrow">
@@ -179,74 +181,74 @@
             </div>
             <div class="right-part">
                 <form class="filters" action="">
-                    <div class="filters__title">Фильтры</div>
+                    <div class="filters__title">Filters</div>
                     <div class="filters__item audience">
-                        <h3 class="title">Целевая аудитория</h3>
+                        <h3 class="title">The target audience</h3>
                         <div class="aud__checkboxes dropdown">
                             <div class="audience__checkbox">
                                 <input type="checkbox" id="employees" name="employee">
-                                <label for="employees">Сотрудники</label>
+                                <label for="employees">Employees</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input type="checkbox" id="students" name="student">  <label for="students">Студенты</label>
+                                <input type="checkbox" id="students" name="student">  <label for="students">Students</label>
                             </div>
                             <div class="audience__checkbox">
                                 <input type="checkbox" id="abiturients" name="abiturient">
-                                <label for="abiturients">Абитуриенты</label>
+                                <label for="abiturients">Abiturients</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input type="checkbox" id="graduates" name="graduate"> <label for="graduates">Выпускники</label>
+                                <input type="checkbox" id="graduates" name="graduate"> <label for="graduates">Graduates</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input type="checkbox" id="employers" name="employer"> <label for="employers">Работодатели</label>
+                                <input type="checkbox" id="employers" name="employer"> <label for="employers">Employers</label>
                             </div>
                         </div>
                     </div>
                     <div class="filters__item nickname">
-                        <h3 class="title">Никнейм</h3>
-                        <input class="dropdown" type="text" placeholder="Никнейм">
+                        <h3 class="title">Nickname</h3>
+                        <input class="dropdown" type="text" placeholder="Nickname">
                     </div>
                     <div class="filters__item emotions" name="uncertain">
-                        <h3 class="title">Эмоциональная окраска</h3>
+                        <h3 class="title">Emotional colouring </h3>
                         <div class="em__checkboxes dropdown">
                             <div class="emotions__checkbox">
                                 <input type="checkbox" id="positive" name="positive">
-                                <label for="positive">Позитивная (+)</label>
+                                <label for="positive">Positive (+)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input type="checkbox" id="negative" name="negative">
-                                <label for="negative">Негативная (-)</label>
+                                <label for="negative">Negative (-)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input type="checkbox" id="neutral" name="neutral">
-                                <label for="neutral">Нейтральная (*)</label>
+                                <label for="neutral">Neutral (*)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input type="checkbox" id="uncertain" name="uncertain">
-                                <label for="uncertain">Не определенная (<>)</label>
+                                <label for="uncertain">Undefined (<>)</label>
                             </div>
                         </div>
                     </div>
                     <div class="filters__item keywords">
-                        <h3 class="title">Ключевые слова</h3>
-                        <input class="dropdown ss" type="text" placeholder="Ключевые слова">
+                        <h3 class="title">Key words</h3>
+                        <input class="dropdown ss" type="text" placeholder="Key words">
                     </div>
                     <div class="filters__item data">
-                        <h3 class="title">Промежуток времени</h3>
+                        <h3 class="title">Time interval</h3>
                         <div class="interval dropdown">
                             <div class="from">
-                                <label for="from">От: </label>
+                                <label for="from">From: </label>
                                 <input type="date" id="from" name="data" min="2017-07-20" max="2017-10-20">
                             </div>
                             <div class="to">
-                                <label for="to">До: </label>
+                                <label for="to">To: </label>
                                 <input type="date" id="to" name="data" min="2017-07-20" max="2017-10-20">
                             </div>
                         </div>
                     </div>
                     <div class="filters__button">
                         <input type="reset" class="fil-b reset">
-                        <div class="fil-b submit">Принять</div>
+                        <div class="fil-b submit">Accept</div>
                     </div>
                 </form>
             </div>
