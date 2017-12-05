@@ -8,9 +8,10 @@ using WebApplication2.Data;
 namespace WebApplication2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171205163734_Post2")]
+    partial class Post2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -175,24 +176,6 @@ namespace WebApplication2.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WebApplication2.Models.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("PostId");
-
-                    b.Property<string>("ownersName");
-
-                    b.Property<string>("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Comment");
-                });
-
             modelBuilder.Entity("WebApplication2.Models.Faculty", b =>
                 {
                     b.Property<Guid>("Id")
@@ -214,14 +197,6 @@ namespace WebApplication2.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("date");
-
-                    b.Property<string>("link");
-
-                    b.Property<string>("ownersName");
-
-                    b.Property<string>("text");
 
                     b.HasKey("Id");
 
@@ -276,13 +251,6 @@ namespace WebApplication2.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApplication2.Models.Comment", b =>
-                {
-                    b.HasOne("WebApplication2.Models.Post")
-                        .WithMany("comments")
-                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Faculty", b =>

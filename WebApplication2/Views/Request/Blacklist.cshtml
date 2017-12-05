@@ -63,11 +63,13 @@
                     </ul>
                 </div>
                 <ul class="list">
+                    @foreach (var item in Model.Posts)
+                    {
                     <li class="list__item">
                         <div class="comment">
-                            <div class="list__author">user1822</div>
-                            <p class="list__text">Закончила физический факультет ТГУ и осталась весьма довольна уровнем образования полученным в вузе. По-моему, те кто дают отрицательные отзывы - всегда чем-то не довольны. Если нормально учиться и самим стремиться достигать поставленных целей, а не ждать чуда, то ТГУ дает именно те навыки, которые остаются востребованными на протяжении всей жизни.</p>
-                            <a href="" class="list__link">Ссылка на источник</a>
+                            <div class="list__author">@Html.DisplayFor(modelItem => item.ownersName)</div>
+                            <p class="list__text">@Html.DisplayFor(modelItem => item.text)</p>
+                            <a href=@item.link class="list__link">Link</a>
                         </div>
                         <div class="coloring">
                             <div class="coloring__main">
@@ -81,95 +83,8 @@
                         </div>
 
                     </li>
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">gitara_01</div>
-                            <p class="list__text">Наука на высшем уровне, а административный аппарат ничего не делает при этом.</p>
-                            <a href="" class="list__link">Ссылка на источник</a>
-                        </div>
-                        <div class="coloring">
-                            <div class="coloring__main">
-                                <div class="minus"></div>
-                            </div>
-                            <div class="other">
-                                <div class="other__item"><div class="plus"></div></div>
-                                <div class="other__item"><div class="mult"></div></div>
-                                <div class="other__item"><div class="hooks"></div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">anonim_lazarev_artem</div>
-                            <p class="list__text">
-                                Университет, безусловно, заслуживает достойное место среди российских ВУЗов. Кадровый состав на очень высоком уровне.
-
-                                Но функция студенческого профкома остается не ясна. Знаю много случаев, когда деканатом или факультетом нарушались права студентов, студенты шли жаловаться в профком, то там просто разводили руками и отсылали обратно в деканат. Профсоюз должен защищать права студентов, но по факту это ограниченное увеселительно-развлекательное отделение при университете. И тут как-то не очень весело! Подумайте, прежде чем становиться членом профкома студентов.
-                            </p>
-                            <a href="" class="list__link">Ссылка на источник</a>
-                        </div>
-                        <div class="coloring">
-                            <div class="coloring__main">
-                                <div class="mult"></div>
-                            </div>
-                            <div class="other">
-                                <div class="other__item"><div class="plus"></div></div>
-                                <div class="other__item"><div class="minus"></div></div>
-                                <div class="other__item"><div class="hooks"></div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">mr_marmelad</div>
-                            <p class="list__text">ТГУ - ведущий российский вуз. Выпускники нашего университета конкурентоспособны на рынке труда, обладают комплексным взглядом на мир, всесторонне развиты (что ни говори - классическое образование).</p>
-                            <a href="" class="list__link">Ссылка на источник</a>
-                        </div>
-                        <div class="coloring">
-                            <div class="coloring__main">
-                                <div class="plus"></div>
-                            </div>
-                            <div class="other">
-                                <div class="other__item"><div class="minus"></div></div>
-                                <div class="other__item"><div class="mult"></div></div>
-                                <div class="other__item"><div class="hooks"></div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">intrigant</div>
-                            <p class="list__text">По техническому обеспечению - есть проблемы с лицензионным софтом, на этом обычно экономят, почем там где нельзя - на физ- мат факультетах.</p>
-                            <a href="" class="list__link">Ссылка на источник</a>
-                        </div>
-                        <div class="coloring">
-                            <div class="coloring__main">
-                                <div class="hooks"></div>
-                            </div>
-                            <div class="other">
-                                <div class="other__item"><div class="plus"></div></div>
-                                <div class="other__item"><div class="minus"></div></div>
-                                <div class="other__item"><div class="mult"></div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">bananchik</div>
-                            <p class="list__text">До Политеха всё никак не дотянет!</p>
-                            <a href="" class="list__link">Ссылка на источник</a>
-                        </div>
-                        <div class="coloring">
-                            <div class="coloring__main">
-                                <div class="minus"></div>
-                            </div>
-                            <div class="other">
-                                <div class="other__item"><div class="plus"></div></div>
-                                <div class="other__item"><div class="mult"></div></div>
-                                <div class="other__item"><div class="hooks"></div></div>
-                            </div>
-                        </div>
-                    </li>
+                    }
+                    
                 </ul>
                 <div class="footer-buttons">
                     <div class="fbutton export">Export</div>

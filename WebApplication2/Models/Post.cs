@@ -13,15 +13,17 @@ namespace WebApplication2.Models
     public class Post
     {
         [DataMember]
-        internal string ownersName;
+        public Guid Id { get; set; } = Guid.NewGuid();
         [DataMember]
-        internal string link;
+        public string ownersName { get; set; }
         [DataMember]
-        internal string text;
+        public string link { get; set; }
         [DataMember]
-        internal string date;
+        public string text { get; set; }
         [DataMember]
-        internal Comment[] comments;
+        public string date { get; set; }
+        [DataMember]
+        public Comment[] comments { get; set; }
 
     }
 }

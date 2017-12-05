@@ -9,8 +9,9 @@ namespace WebApplication2.Models.Requests
     public class Choose     
     {
         [Required]
-        public String University { get; set; }
-        public String Faculty { get; set; }
+        public string University { get; set; }
+        public string Faculty { get; set; }
         public ICollection<University> Universities { get; set; }
+        public ICollection<Faculty> Faculties { get; set; }
     }
 }

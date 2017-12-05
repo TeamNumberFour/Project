@@ -12,10 +12,15 @@
                     <div class="bg__common bg-grey"></div>
                     <div class="bg__common bg-green"></div>
                 </li>
+                <li class="user"><a asp-area="" asp-controller="Request" asp-action="Choose">Search</a></li>
+            @if (User.IsInRole(ApplicationRoles.Administrators))
+
+            {<li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>}
             </ul>
             <ul class="menu__list-right">
                 <li class="menu__login">@UserManager.GetUserName(User)</li>
-                <li class="menu__exit"><a href="index.html" class="menu__exit-link">Log out</a></li>
+                
+               <li class="menu__exit"><a href="index.html" class="menu__exit-link">Log out</a></li>
             </ul>
         </div>
         <div class="modal_form">

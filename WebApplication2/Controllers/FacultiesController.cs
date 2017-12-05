@@ -23,10 +23,28 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Faculties
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid? UniversityId)
         {
-            var applicationDbContext = _context.Faculties.Include(f => f.University);
-            return View(await applicationDbContext.ToListAsync());
+            if (UniversityId == null)
+            {
+                return this.NotFound();
+            }
+
+            var University = await this._context.Universities
+                .SingleOrDefaultAsync(x => x.Id == UniversityId);
+
+            if (University == null)
+            {
+                return this.NotFound();
+            }
+
+            this.ViewBag.University = University;
+            var faculties = await this._context.Faculties
+                .Include(w => w.University)
+                .Where(x => x.UniversityId == UniversityId)
+                .ToListAsync();
+
+            return this.View(faculties);
         }
 
         // GET: Faculties/Details/5
@@ -67,7 +85,7 @@ namespace WebApplication2.Controllers
                 faculty.Id = Guid.NewGuid();
                 _context.Add(faculty);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { UniversityId = faculty.UniversityId });
             }
             ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Title", faculty.UniversityId);
             return View(faculty);
@@ -120,7 +138,7 @@ namespace WebApplication2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { UniversityId = faculty.UniversityId });
             }
             ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Title", faculty.UniversityId);
             return View(faculty);
@@ -153,7 +171,7 @@ namespace WebApplication2.Controllers
             var faculty = await _context.Faculties.SingleOrDefaultAsync(m => m.Id == id);
             _context.Faculties.Remove(faculty);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { UniversityId = faculty.UniversityId });
         }
 
         private bool FacultyExists(Guid id)

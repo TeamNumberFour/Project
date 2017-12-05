@@ -16,16 +16,31 @@ namespace WebApplication2.Services
 {
     public class ParsingService: IParsingService
     {
-       public async void Gazeta(string req, string from, string to)
+        private  string Query;
+        private List<Post> Com=new List<Post>();
+        public async Task<Post[]> Common(string query)
+
+        {
+            Query =query;
+           await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
+            
+
+            return Com.ToArray();
+            
+
+
+
+        }
+       public async Task Gazeta( string from, string to)
         {
             var str = "";
 
             List<Post> posts = new List<Post>();
             using (HttpClient client = new HttpClient())
             {
-                var result = await client.GetStringAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + req + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8");
+                var result = await client.GetStringAsync("https://www.gazeta.ru/search.shtml?p=search&page=0&text=" + Query + "&article=&section=&from=" + from + "&to=" + to + "&sort_order=published_desc&input=utf8");
                 Task.WaitAll();
-                    str = result.ToString();
+                str = result.ToString();
             
             }
             
@@ -47,7 +62,8 @@ namespace WebApplication2.Services
 
                 posts.Add(post);
             }
-            //return posts.ToArray();
+
+            Com.AddRange(posts);
         }
     }
     }

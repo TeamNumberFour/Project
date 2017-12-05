@@ -8,21 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
 using WebApplication2.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WebApplication2.Models;
 using WebApplication2.Models.AccountViewModels;
 using WebApplication2.Services;
-using WebApplication2.Data;
 namespace WebApplication2.Controllers
 {
     [Authorize(Roles = ApplicationRoles.Administrators)]

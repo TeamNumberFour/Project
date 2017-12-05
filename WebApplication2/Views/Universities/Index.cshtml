@@ -13,6 +13,11 @@
                     <div class="bg__common bg-grey"></div>
                     <div class="bg__common bg-green"></div>
                 </li>
+                <li class="user"><a asp-area="" asp-controller="Request" asp-action="Choose">Search</a></li>
+                @if (User.IsInRole(ApplicationRoles.Administrators))
+                {
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
+                    }
             </ul>
             <ul class="menu__list-right">
                 <li class="menu__login">@UserManager.GetUserName(User)</li>
@@ -21,12 +26,11 @@
         </div>
         <div class="modal_form">
             <span class="modal_close">X</span>
-            Login: <input class="inputClear" type="text">
-            Password: <input class="inputClear" type="text">
+            Title: <input class="inputClear" type="text">
         </div>
         <div class="overlay"></div>
         <div class="content">
-            <a class="create" asp-area="" asp-controller="Universities" asp-action="Create">Create</>
+            <a class="create" asp-area="" asp-controller="Universities" asp-action="Create">Create</a>
             @{int i = 0; }
             @foreach (var item in Model.OrderBy(x => x.Title))
             {
@@ -50,39 +54,3 @@
     </div>
 </div>
 
-@*
-
-    @{
-        ViewData["Title"] = "Index";
-    }
-
-    <h2>Index</h2>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>
-*@

@@ -55,16 +55,19 @@ namespace WebApplication2.Controllers
         
         public async Task<IActionResult> Choose()
         {
+            
             var Univer = await this.context.Universities.ToListAsync();
-                
+            var Faculty= await this.context.Faculties.ToListAsync();
+
 
 
 
             var model = new Choose
             {
-                Universities = (ICollection<University>)Univer
-                
-                
+                Universities = (ICollection<University>)Univer,
+                Faculties = (ICollection<Faculty>)Faculty
+
+
             };
 
             return this.View(model);
@@ -75,16 +78,51 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Choose(Choose model)
+        public async Task<IActionResult> Choose(Choose model, string un, string fa, bool locker)
         {
-            parsingService.Gazeta(model.University, DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
+            if (!locker)
+            {
+                var Univer = await this.context.Universities.ToListAsync();
+                var Faculty = await this.context.Faculties.ToListAsync();
+                var model1 = new Choose
+                {
+                    Universities = (ICollection<University>)Univer,
+                    Faculties = (ICollection<Faculty>)Faculty,
+                    University = un
 
 
+                };
+                this.ViewBag.University = un;
+                return this.View(model1);
+            }
+            
+            Post[] posts =await parsingService.Common(un + " " + fa);
+            
+                var itemsToDelete = context.Set<Post>();
+                context.Posts.RemoveRange(itemsToDelete);
+                await context.SaveChangesAsync();
+            
+            foreach (var postitem in posts)
+            {
+                var post = new Post
+                {
+                    ownersName=postitem.ownersName,
+                    text=postitem.text,
+                    date=postitem.date,
+                    comments=postitem.comments,
+                    link=postitem.link
+                };
+                context.Posts.Add(post);
+            }
+            await this.context.SaveChangesAsync();
+
+            var Postmass = await this.context.Posts.ToListAsync();
             return this.View("Blacklist", new List
                  {
-                     University=model.University,
-                     Faculty=model.Faculty,
-                     Query=model.University+" "+model.Faculty
+                     University=un,
+                     Faculty=fa,
+                     Query=un+" "+fa,
+                     Posts=(ICollection<Post>)Postmass
                  });
         }
 

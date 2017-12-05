@@ -1,41 +1,109 @@
 @model IEnumerable<WebApplication2.Models.Faculty>
-
+<script src="~/js/common.js"></script>
+@inject UserManager<ApplicationUser> UserManager
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @ViewBag.University.Title + " Faculties";
 }
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="bg-blue">
+    <div class="wrapper">
+        <div class="menu">
+            <ul class="menu__list-left">
+                <li class="bg">
+                    <div class="bg__common bg-red"></div>
+                    <div class="bg__common bg-grey"></div>
+                    <div class="bg__common bg-green"></div>
+                </li>
+                <li class="user"><a asp-area="" asp-controller="Request" asp-action="Choose">Search</a></li>
+                @if (User.IsInRole(ApplicationRoles.Administrators))
+                {
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
+                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>}
+            </ul>
+            <ul class="menu__list-right">
+                <li class="menu__login">@UserManager.GetUserName(User)</li>
+                <li class="menu__exit"><a href="index.html" class="menu__exit-link">Log out</a></li>
+            </ul>
+        </div>
+        <div class="modal_form">
+            <span class="modal_close">X</span>
+            Title: <input class="inputClear" type="text">
+            
+        </div>
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>@ViewBag.University.Title</h2>
+            <a class="create" asp-area=""asp-action="Create" asp-route-UniversityId="@ViewBag.University.Id">Create</a>
+            @{int i = 0; }
+            @foreach (var item in Model.OrderBy(x => x.Title))
+            {
+
+                <div class="user-item">
+                    <div class="user__number">@(i + 1)</div>
+                    @{i++;}
+                    <div class="other-info">
+                        <div class="inf">
+                            <div class="user__login">@Html.DisplayFor(modelItem => item.Title)</div>
+                            
+                        </div>
+                        <div class="remake">
+                            <a class="user__update" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@item.Id"><input class="user__delete" type="submit" value="Delete" />  </form>
+                        </div>
+                    </div>
+                </div>
+                        }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+    <p>
+        <a asp-action="Create" asp-route-UniversityId="@ViewBag.University.Id">Create </a>
+    </p>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.University)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.University)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.University.Title)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.University.Title)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+*@

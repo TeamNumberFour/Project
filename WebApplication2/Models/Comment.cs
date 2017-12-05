@@ -8,8 +8,10 @@ namespace WebApplication2.Models
     public class Comment
     {
         [DataMember]
-        internal string ownersName;
+        public Guid Id { get; set; } = Guid.NewGuid();
         [DataMember]
-        internal string text;
+        public string ownersName { get; set; }
+        [DataMember]
+        public string text { get; set; }
     }
 }

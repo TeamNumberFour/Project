@@ -8,5 +8,6 @@ namespace WebApplication2.Models.Requests
     public class List: Choose
     {
         public string Query { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

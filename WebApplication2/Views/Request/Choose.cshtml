@@ -4,10 +4,6 @@
 <script src="~/js/common.js"></script>   
 @inject UserManager<ApplicationUser> UserManager
         
-@*@model IEnumerable<WebApplication2.Models.University>
-    @{
-        ViewData["Title"] = "Choose";
-    }             *@
 
 @{ViewData["Title"] = "Choose";      }
 <div class="bg-blue">
@@ -35,28 +31,27 @@
                 </ul>
             </form>
         </div>
-        <form class="form" asp-action="Choose">
+        <form class="form" asp-action="Choose" method="post">
             <div class="choice">
-                <input asp-for="University" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
-                <datalist id="univer-list">
+               
+                <input name="Un" asp-for="University" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
+                <datalist  id="univer-list">
                     @foreach (var item in Model.Universities)
                         {<option>@Html.DisplayFor(modelItem => item.Title)</option>}
                 </datalist>
-                <input asp-for="Faculty" class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
+                <button hidden></button>
+                <input name="Fa" asp-for="Faculty" class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
                 <datalist id="faculty-list">
-
-                    <option>Институт военного образования</option>
-                    <option>Исторический факультет</option>
-                    <option>Радиофизический факультет</option>
-                    <option>Факультет журналистики</option>
-                    <option>Факультет информатики</option>
-                    <option>Факультет психологии</option>
-                    <option>Химический факультет</option>
-                    <option>Юридический институт</option>
+                    @foreach (var item1 in Model.Faculties)
+                    {
+                        if (item1.University.Title.Equals(ViewBag.University)) { 
+                   <option>@Html.DisplayFor(modelItem => item1.Title)</option>}
+                    }
+                    
                 </datalist>
             </div>
 
-            <button  class="form__search">Find</button>
+            <button type="submit" name="Locker" value="True" class="form__search">Find</button>
         </form>
     </div>
 </div>
