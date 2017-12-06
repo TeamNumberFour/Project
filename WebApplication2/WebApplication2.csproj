@@ -12,6 +12,7 @@
     <UserSecretsId>aspnet-WebApplication2-5b652ab6-cfa7-426d-a3af-afa1b952e049</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GoogleApi" Version="3.2.12" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
@@ -33,9 +34,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Request\" />
   </ItemGroup>
 
 </Project>

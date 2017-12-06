@@ -15,7 +15,7 @@ using WebApplication2.Data;
 using WebApplication2.Models.AccountViewModels;
 using WebApplication2.Services;
 using Microsoft.EntityFrameworkCore;
-
+using VkNet.Utils;
 namespace WebApplication2.Controllers
 {
     [Authorize]
@@ -96,7 +96,7 @@ namespace WebApplication2.Controllers
                 return this.View(model1);
             }
             
-            Post[] posts =await parsingService.Common(un + " " + fa);
+            Post[] posts =await parsingService.Common(un + " " + fa, un, fa);
             
                 var itemsToDelete = context.Set<Post>();
                 context.Posts.RemoveRange(itemsToDelete);
@@ -110,24 +110,88 @@ namespace WebApplication2.Controllers
                     text=postitem.text,
                     date=postitem.date,
                     comments=postitem.comments,
-                    link=postitem.link
+                    link=postitem.link,
+                    emo=postitem.emo,
+                    pass=postitem.pass,
+                    source=postitem.source
                 };
                 context.Posts.Add(post);
             }
             await this.context.SaveChangesAsync();
 
             var Postmass = await this.context.Posts.ToListAsync();
-            return this.View("Blacklist", new List
+            return this.View("List", new List
                  {
-                     University=un,
-                     Faculty=fa,
-                     Query=un+" "+fa,
-                     Posts=(ICollection<Post>)Postmass
+                     
+                     Posts=(ICollection<Post>)Postmass,
+                     
                  });
         }
 
-    
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Filtered(List model)
+        {
+            List<Post> Filt = new List<Post>();
+            var Poststofilter = await this.context.Posts.ToListAsync() ;
+            foreach (var item in Poststofilter)
+            {
+                if(model.positive || model.negative || model.neutral || model.uncertain ) switch (item.emo)
+                {
+                    case 0:
+                        if (!model.positive) item.pass = false;
+                        break;
+                    case 1:
+                        if (!model.negative) item.pass = false;
+                        break;
+                    case 2:
+                        if (!model.neutral) item.pass = false;
+                        break;
+                    case 3:
+                        if (!model.uncertain) item.pass = false;
+                        break;
+                }
+                
+                if (!item.source.Equals("regnum") &&model.data1>=DateTime.Now.AddDays(-21) && model.data2 <= DateTime.Now) if (DateTime.Parse(item.date) < model.data1 || DateTime.Parse(item.date)> model.data2) item.pass = false;
+                if(model.nickname!=null)if (string.Compare(item.ownersName,model.nickname)!=0) item.pass = false;
+                if (model.key != null) if (!item.text.Contains(model.key)) item.pass = false;
+                List<string> check = new List<string>();
+                if (model.abitur) { check.Add("vk"); check.Add("prof"); }
+                if (model.student) check.Add("vk");
+                if (model.employee) { check.Add("regnum"); check.Add("vesti"); }
+                if (model.employer) { check.Add("regnum"); check.Add("vesti"); check.Add("vk"); check.Add("prof"); check.Add("gazeta"); }
+                if (model.grad) { check.Add("regnum"); check.Add("vesti"); check.Add("vk"); check.Add("prof"); }
+                if (!check.Contains(item.source) && check.Count>0) { item.pass = false; }
+
+
+
+                if (item.pass) Filt.Add(item);
+            }
+
+            return this.View("List", new List
+            {
+                filtered = true,
+                employee=model.employee,
+                student=model.student,
+                abitur=model.abitur,
+                employer=model.employer,
+                grad=model.grad,
+                nickname=model.nickname,
+                key=model.key,
+                positive=model.positive,
+                negative=model.negative,
+                neutral=model.neutral,
+                uncertain=model.uncertain,
+                data1=model.data1,
+                data2=model.data2,
+                Posts=(ICollection<Post>)Filt
+
+            });
+
+
+
+        }
 
     }
 }

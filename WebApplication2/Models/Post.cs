@@ -24,6 +24,10 @@ namespace WebApplication2.Models
         public string date { get; set; }
         [DataMember]
         public Comment[] comments { get; set; }
+        [DataMember]
+        public int emo { get; set; }
+        public string source { get; set; }
+        public bool pass { get; set; }
 
     }
 }
