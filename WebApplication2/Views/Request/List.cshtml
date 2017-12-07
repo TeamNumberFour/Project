@@ -43,10 +43,11 @@
                         <div class="instagram">Insta</div>
                     </div>
                     <ul class="source">
-                        <li class="source__item">VK: <div class="percent percent-vk">53% <span class="count">(492 com.)</span></div></li>
-                        <li class="source__item">Facebook: <div class="percent percent-fb">27% <span class="count">(251 com.)</span></div></li>
-                        <li class="source__item">Instagram: <div class="percent percent-inst">12% <span class="count">(111 com.)</span></div></li>
-                        <li class="source__item">Twitter: <div class="percent percent-twitter">8% <span class="count">(72 com.)</span></div></li>
+                        <li class="source__item">VK: <div class="percent percent-vk">@ViewBag.vkp % <span class="count">(@ViewBag.vkc com.)</span></div></li>
+                        <li class="source__item">Gazeta: <div class="percent percent-fb">@ViewBag.gazetap % <span class="count">(@ViewBag.gazetac com.)</span></div></li>
+                        <li class="source__item">Regnum: <div class="percent percent-inst">@ViewBag.regnump % <span class="count">(@ViewBag.regnumc com.)</span></div></li>
+                        <li class="source__item">Vesti: <div class="percent percent-twitter">@ViewBag.vestip % <span class="count">(@ViewBag.vestic com.)</span></div></li>
+                        <li class="source__item">Professor.Org: <div class="percent percent-twitter">@ViewBag.profp % <span class="count">(@ViewBag.profc com.)</span></div></li>
                     </ul>
                     <div class="diagr">
                         <img src="~/images/diagram2.png" alt="">
@@ -56,10 +57,10 @@
                         <div class="uncertain"><>	</div>
                     </div>
                     <ul class="emotion-color">
-                        <li class="ec__item">Negative: <div class="percent percent-negative">35% <span class="count">(324)</span></div></li>
-                        <li class="ec__item">Neutral: <div class="percent percent-neutral">28% <span class="count">(260)</span></div></li>
-                        <li class="ec__item">Positive: <div class="percent percent-positive">27% <span class="count">(251)</span></div></li>
-                        <li class="ec__item">Undefined: <div class="percent percent-uncertain">12% <span class="count">(111)</span></div></li>
+                        <li class="ec__item">Negative: <div class="percent percent-negative">@ViewBag.negativep % <span class="count">(@ViewBag.negativec)</span></div></li>
+                        <li class="ec__item">Neutral: <div class="percent percent-neutral">@ViewBag.neutralp % <span class="count">(@ViewBag.neutralc)</span></div></li>
+                        <li class="ec__item">Positive: <div class="percent percent-positive">@ViewBag.positivep % <span class="count">(@ViewBag.positivec)</span></div></li>
+                        <li class="ec__item">Undefined: <div class="percent percent-uncertain">@ViewBag.uncertainp % <span class="count">(@ViewBag.uncertainc)</span></div></li>
                     </ul>
                 </div>
                 @if (Model.Posts.Count == 0) {

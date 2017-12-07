@@ -101,7 +101,16 @@ namespace WebApplication2.Controllers
                 var itemsToDelete = context.Set<Post>();
                 context.Posts.RemoveRange(itemsToDelete);
                 await context.SaveChangesAsync();
-            
+            int Count = 0;
+            double vkc = 0;
+            double gazetac = 0;
+            double vestic = 0;
+            double profc = 0;
+            double regnumc = 0;
+            double positivec = 0;
+            double negativec = 0;
+            double neutralc = 0;
+            double uncertainc = 0;
             foreach (var postitem in posts)
             {
                 var post = new Post
@@ -115,8 +124,68 @@ namespace WebApplication2.Controllers
                     pass=postitem.pass,
                     source=postitem.source
                 };
+                Count++;
+                
+                switch (post.source)
+                {
+                    case "vk":
+                        vkc++;
+                        break;
+                    case "gazeta":
+                        gazetac++;
+                        break;
+                    case "vesti":
+                        vestic++;
+                        break;
+                    case "prof":
+                        profc++;
+                        break;
+                    case "regnum":
+                        regnumc++;
+                        break;
+
+
+                }
+                switch (post.emo)
+                {
+                    case 0:
+                        positivec++;
+                        break;
+                    case 1:
+                        negativec++;
+                        break;
+                    case 2:
+                        neutralc++;
+                        break;
+                    case 3:
+                        uncertainc++;
+                        break;
+                    
+
+
+                }
                 context.Posts.Add(post);
             }
+            this.ViewBag.vkc = vkc;
+            this.ViewBag.gazetac = gazetac;
+            this.ViewBag.vestic = vestic;
+            this.ViewBag.profc = profc;
+            this.ViewBag.regnumc = regnumc;
+            this.ViewBag.positivec = positivec;
+            this.ViewBag.negativec = negativec;
+            this.ViewBag.neutralc = neutralc;
+            this.ViewBag.uncertainc = uncertainc;
+            ViewBag.vkp = vkc / Count * 100;
+            ViewBag.gazetap = gazetac / Count * 100;
+            ViewBag.vestip = vestic / Count * 100;
+            ViewBag.profp = profc / Count * 100;
+            ViewBag.regnump = regnumc / Count * 100;
+            ViewBag.positivep = positivec / Count * 100;
+            ViewBag.negativep = negativec / Count * 100;
+            ViewBag.neutralp = neutralc / Count * 100;
+            ViewBag.uncertainp = uncertainc / Count * 100;
+
+
             await this.context.SaveChangesAsync();
 
             var Postmass = await this.context.Posts.ToListAsync();
@@ -133,6 +202,16 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Filtered(List model)
         {
+            int Count = 0;
+            double vkc = 0;
+            double gazetac = 0;
+            double vestic = 0;
+            double profc = 0;
+            double regnumc = 0;
+            double positivec = 0;
+            double negativec = 0;
+            double neutralc = 0;
+            double uncertainc = 0;
             List<Post> Filt = new List<Post>();
             var Poststofilter = await this.context.Posts.ToListAsync() ;
             foreach (var item in Poststofilter)
@@ -166,8 +245,70 @@ namespace WebApplication2.Controllers
 
 
 
-                if (item.pass) Filt.Add(item);
+                if (item.pass)
+                {
+                    Count++;
+
+                    switch (item.source)
+                    {
+                        case "vk":
+                            vkc++;
+                            break;
+                        case "gazeta":
+                            gazetac++;
+                            break;
+                        case "vesti":
+                            vestic++;
+                            break;
+                        case "prof":
+                            profc++;
+                            break;
+                        case "regnum":
+                            regnumc++;
+                            break;
+
+
+                    }
+                    switch (item.emo)
+                    {
+                        case 0:
+                            positivec++;
+                            break;
+                        case 1:
+                            negativec++;
+                            break;
+                        case 2:
+                            neutralc++;
+                            break;
+                        case 3:
+                            uncertainc++;
+                            break;
+
+
+
+                    }
+                    Filt.Add(item);
+                }
+
             }
+            this.ViewBag.vkc = vkc;
+            this.ViewBag.gazetac = gazetac;
+            this.ViewBag.vestic = vestic;
+            this.ViewBag.profc = profc;
+            this.ViewBag.regnumc = regnumc;
+            this.ViewBag.positivec = positivec;
+            this.ViewBag.negativec = negativec;
+            this.ViewBag.neutralc = neutralc;
+            this.ViewBag.uncertainc = uncertainc;
+            ViewBag.vkp = vkc / Count * 100;
+            ViewBag.gazetap = gazetac / Count * 100;
+            ViewBag.vestip = vestic / Count * 100;
+            ViewBag.profp = profc / Count * 100;
+            ViewBag.regnump = regnumc / Count * 100;
+            ViewBag.positivep = positivec / Count * 100;
+            ViewBag.negativep = negativec / Count * 100;
+            ViewBag.neutralp = neutralc / Count * 100;
+            ViewBag.uncertainp = uncertainc / Count * 100;
 
             return this.View("List", new List
             {
