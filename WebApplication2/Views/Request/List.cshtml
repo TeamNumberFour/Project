@@ -73,7 +73,7 @@
                         <div class="comment">
                             <div class="list__author">@Html.DisplayFor(modelItem => item.ownersName)</div>
                             <p class="list__text">@Html.DisplayFor(modelItem => item.text)</p>
-                            <a href=@item.link class="list__link">Link</a>
+                            <a href=@item.link class="list__link">@item.source</a>
                         </div>
                         <div class="coloring">
                             @if (item.emo == 0)

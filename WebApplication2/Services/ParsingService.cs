@@ -24,7 +24,9 @@ namespace WebApplication2.Services
             await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
             await vesti();
             await regnum();
-            await prof(Uni, Fac);
+            await prof(Uni, Fac); 
+            
+            
             await VK(100, 21, 0);
 
 
