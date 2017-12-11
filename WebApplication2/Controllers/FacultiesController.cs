@@ -67,9 +67,23 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Faculties/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Guid? universityId)
         {
-            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Title");
+            if (universityId == null)
+            {
+                return this.NotFound();
+            }
+
+            var university = await this._context.Universities
+                .SingleOrDefaultAsync(x => x.Id == universityId);
+
+            if (university == null)
+            {
+                return this.NotFound();
+            }
+
+            this.ViewBag.University = university;
+            
             return View();
         }
 
