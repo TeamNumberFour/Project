@@ -106,6 +106,9 @@ namespace WebApplication2.Controllers
             double vkc = 0;
             double gazetac = 0;
             double vestic = 0;
+            double riac = 0;
+            double twitc = 0;
+            double newsc = 0;
             double profc = 0;
             double regnumc = 0;
             double positivec = 0;
@@ -144,6 +147,15 @@ namespace WebApplication2.Controllers
                     case "regnum":
                         regnumc++;
                         break;
+                    case "news.ru":
+                        newsc++;
+                        break;
+                    case "twitter":
+                        twitc++;
+                        break;
+                    case "ria":
+                        riac++;
+                        break;
 
 
                 }
@@ -168,6 +180,9 @@ namespace WebApplication2.Controllers
                 context.Posts.Add(post);
             }
             this.ViewBag.vkc = vkc;
+            this.ViewBag.newsc = newsc;
+            this.ViewBag.riac = riac;
+            this.ViewBag.twitc = twitc;
             this.ViewBag.gazetac = gazetac;
             this.ViewBag.vestic = vestic;
             this.ViewBag.profc = profc;
@@ -177,6 +192,9 @@ namespace WebApplication2.Controllers
             this.ViewBag.neutralc = neutralc;
             this.ViewBag.uncertainc = uncertainc;
             ViewBag.vkp = vkc / Count * 100;
+            ViewBag.riap = riac / Count * 100;
+            ViewBag.newsp = newsc / Count * 100;
+            ViewBag.twitp = twitc / Count * 100;
             ViewBag.gazetap = gazetac / Count * 100;
             ViewBag.vestip = vestic / Count * 100;
             ViewBag.profp = profc / Count * 100;
