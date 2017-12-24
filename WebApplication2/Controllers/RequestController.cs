@@ -311,6 +311,9 @@ namespace WebApplication2.Controllers
 
             }
             this.ViewBag.vkc = vkc;
+            this.ViewBag.newsc = newsc;
+            this.ViewBag.riac = riac;
+            this.ViewBag.twitc = twitc;
             this.ViewBag.gazetac = gazetac;
             this.ViewBag.vestic = vestic;
             this.ViewBag.profc = profc;
@@ -319,15 +322,18 @@ namespace WebApplication2.Controllers
             this.ViewBag.negativec = negativec;
             this.ViewBag.neutralc = neutralc;
             this.ViewBag.uncertainc = uncertainc;
-            ViewBag.vkp = vkc / Count * 100;
-            ViewBag.gazetap = gazetac / Count * 100;
-            ViewBag.vestip = vestic / Count * 100;
-            ViewBag.profp = profc / Count * 100;
-            ViewBag.regnump = regnumc / Count * 100;
-            ViewBag.positivep = positivec / Count * 100;
-            ViewBag.negativep = negativec / Count * 100;
-            ViewBag.neutralp = neutralc / Count * 100;
-            ViewBag.uncertainp = uncertainc / Count * 100;
+            ViewBag.vkp = (int)(vkc / Count * 100);
+            ViewBag.riap = (int)(riac / Count * 100);
+            ViewBag.newsp = (int)(newsc / Count * 100);
+            ViewBag.twitp = (int)(twitc / Count * 100);
+            ViewBag.gazetap = (int)(gazetac / Count * 100);
+            ViewBag.vestip = (int)(vestic / Count * 100);
+            ViewBag.profp = (int)(profc / Count * 100);
+            ViewBag.regnump = (int)(regnumc / Count * 100);
+            ViewBag.positivep = (int)(positivec / Count * 100);
+            ViewBag.negativep = (int)(negativec / Count * 100);
+            ViewBag.neutralp = (int)(neutralc / Count * 100);
+            ViewBag.uncertainp = (int)(uncertainc / Count * 100);
 
             return this.View("List", new List
             {
