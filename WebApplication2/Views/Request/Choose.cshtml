@@ -6,6 +6,7 @@
         
 
 @{ViewData["Title"] = "Choose";      }
+
 <div class="bg-blue">
     <div class="main-wrapper">
         <div class="menu">
@@ -31,7 +32,8 @@
                 </ul>
             </form>
         </div>
-        <form class="form" asp-action="Choose" method="post">
+        <p id="timer"></p>
+        <form id="cho" class="form" asp-action="Choose" method="post">
             <div class="choice">
                
                 <input name="Un" asp-for="University" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">

@@ -5,6 +5,8 @@
 @{
     ViewData["Title"] = "List";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 
 <div class="bg-blue">
     <div class="wrapper">
@@ -36,14 +38,10 @@
             <div class="left-part">
                 <div class="diagrams">
                     <div class="diagr">
-                        <img src="~/images/diagram2.png" alt="">
-                        <div class="vk">VK</div>
-                        <div class="twitter">Twitter</div>
-                        <div class="facebook">FB</div>
-                        <div class="instagram">Insta</div>
+                        <div id="sparkline"></div>
                     </div>
                     <ul class="source">
-                        <li class="source__item">VK: <div class="percent percent-vk">@ViewBag.vkp%3.1 % <span class="count">(@ViewBag.vkc com.)</span></div></li>
+                        <li class="source__item">VK: <div class="percent percent-vk">@ViewBag.vkp % <span class="count">(@ViewBag.vkc com.)</span></div></li>
                         <li class="source__item">Gazeta: <div class="percent percent-fb">@ViewBag.gazetap % <span class="count">(@ViewBag.gazetac com.)</span></div></li>
                         <li class="source__item">Regnum: <div class="percent percent-inst">@ViewBag.regnump % <span class="count">(@ViewBag.regnumc com.)</span></div></li>
                         <li class="source__item">Vesti: <div class="percent percent-twitter">@ViewBag.vestip % <span class="count">(@ViewBag.vestic com.)</span></div></li>
@@ -53,11 +51,8 @@
                         <li class="source__item">RIA: <div class="percent percent-twitter">@ViewBag.riap % <span class="count">(@ViewBag.riac com.)</span></div></li>
                     </ul>
                     <div class="diagr">
-                        <img src="~/images/diagram2.png" alt="">
-                        <div class="positive">+</div>
-                        <div class="negative">-</div>
-                        <div class="neutral">*</div>
-                        <div class="uncertain"><>	</div>
+                        <div id="sparkline2"></div>
+
                     </div>
                     <ul class="emotion-color">
                         <li class="ec__item">Negative: <div class="percent percent-negative">@ViewBag.negativep % <span class="count">(@ViewBag.negativec)</span></div></li>
@@ -214,3 +209,51 @@
     </div>
 </div>
 
+<script>
+ // Это в конец вьюшки List
+
+          var values = [@ViewBag.vkc,@ViewBag.gazetac, @ViewBag.regnumc, @ViewBag.vestic, @ViewBag.profc, @ViewBag.newsc, @ViewBag.twitc, @ViewBag.riac]; // сюда значения
+
+            $('#sparkline').sparkline(values, {
+                type: "pie",
+                width: '129',// можно подогнать, если нужно
+                height: '129',
+
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+                tooltipValueLookups: {
+                    'offset': { // имена
+                        0: 'vk',
+                        1: 'gazeta',
+                        2: 'regnum',
+                        3: 'vesti',
+                        4: 'professor.org',
+                        5: 'news',
+                        6: 'twitter',
+                        7: 'ria'
+                    }
+                }
+            });
+            var values2 = [@ViewBag.positivec, @ViewBag.negativec, @ViewBag.neutralc, @ViewBag.uncertainc];
+
+            $('#sparkline2').sparkline(values2, {
+                type: "pie",
+                width: '129',
+                height: '129',
+
+                tooltipFormat: '{{offset:offset}} ({{percent.1}}%) ',
+                tooltipValueLookups: {
+                    'offset': {
+                        0: 'positive',
+                        1: 'negative',
+                        2: 'neutral',
+                        3: 'uncertain'
+                    }
+                }
+            });
+
+</script>
+<style>
+    #jqstooltip {
+        box-sizing: initial;
+    }
+</style>

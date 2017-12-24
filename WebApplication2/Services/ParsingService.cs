@@ -21,13 +21,14 @@ namespace WebApplication2.Services
 
         {
             Query =query;
+            await prof(Uni, Fac);
             await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
             await vesti();
             await regnum();
-            await prof(Uni, Fac);
+          
             await news(Uni, Fac);
             
-            await VK(100, 21, 0);
+            await VK(50, 21, 0);
             await GetTweets(Uni, Fac);
             await ria(Query);
 
@@ -116,6 +117,7 @@ namespace WebApplication2.Services
         // профессор рейтинг
         public async Task prof(string uni, string fac)
         {
+            CancellationTokenSource cts; 
             Random rand = new Random();
             var str = "";
             var newUrl = "";
@@ -130,9 +132,12 @@ namespace WebApplication2.Services
                 {
                     url = "https://yandex.ru/search/?text=" + "Отзывы" + "%20" + uni + "%20professorrating.org&lr=67";
                 }
-                var htmlCode = await client.GetStringAsync(url);
-                Task.WaitAll();
-                str = htmlCode;
+                Uri uri;
+                if (Uri.TryCreate(url, UriKind.Absolute, out uri)) { var htmlCode = await client.GetStringAsync(url); Task.WaitAll();
+                    str = htmlCode;
+                }
+                
+                
             }
 
 
@@ -437,6 +442,7 @@ namespace WebApplication2.Services
                     post.source = "ria";
                     post.pass = true;
                     posts.Add(post);
+                    
                 }
                 i++;
             }
