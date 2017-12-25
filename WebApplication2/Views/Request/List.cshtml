@@ -129,6 +129,7 @@
             </div>
             <div class="right-part">
                 <form  asp-area="" class="filters" asp-controller="Request" asp-action="Filtered" method="post">
+                    <input type="hidden" asp-for="Query">
                     <input asp-for="filtered" type="hidden">
                     <input name="Posts" asp-for="Posts" type="hidden" >
                     <div class="filters__title">Filters</div>

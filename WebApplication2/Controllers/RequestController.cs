@@ -212,6 +212,7 @@ namespace WebApplication2.Controllers
                  {
                      
                      Posts=(ICollection<Post>)Postmass,
+                     Query=un+" "+fa
                      
                  });
         }
@@ -362,7 +363,8 @@ namespace WebApplication2.Controllers
                 uncertain=model.uncertain,
                 data1=model.data1,
                 data2=model.data2,
-                Posts=(ICollection<Post>)Filt
+                Posts=(ICollection<Post>)Filt,
+                Query=model.Query
 
             });
 
