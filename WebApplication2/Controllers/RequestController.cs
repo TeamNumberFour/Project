@@ -16,7 +16,7 @@ using WebApplication2.Models.AccountViewModels;
 using WebApplication2.Services;
 using Microsoft.EntityFrameworkCore;
 using VkNet.Utils;
-
+using Shark.PdfConvert;
 namespace WebApplication2.Controllers
 {
     [Authorize]
@@ -227,6 +227,9 @@ namespace WebApplication2.Controllers
             double vestic = 0;
             double profc = 0;
             double regnumc = 0;
+            double riac = 0;
+            double twitc = 0;
+            double newsc = 0;
             double positivec = 0;
             double negativec = 0;
             double neutralc = 0;
@@ -285,7 +288,15 @@ namespace WebApplication2.Controllers
                         case "regnum":
                             regnumc++;
                             break;
-
+                        case "news.ru":
+                            newsc++;
+                            break;
+                        case "twitter":
+                            twitc++;
+                            break;
+                        case "ria":
+                            riac++;
+                            break;
 
                     }
                     switch (item.emo)
