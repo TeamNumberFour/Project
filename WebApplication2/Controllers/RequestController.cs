@@ -35,7 +35,7 @@ namespace WebApplication2.Controllers
         private readonly string _externalCookieScheme;
         private readonly ApplicationDbContext context;
         private readonly IParsingService parsingService;
-
+        
         public RequestController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -228,14 +228,15 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> Filtered(List model, string query, string export, string nickname, bool employer, bool grad, bool abitur, bool student, bool employee, bool neutral, bool negative, bool positive, bool uncertain, string data1, string data2, string key)
         {
 
+
             if (export != null)
-            {
+            { 
                 export = this.parsingService.getstr(export);
                 var res = "<!DOCTYPE html> <html lang=\"ru\"> <head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/> </head> " + "<div class=\"bg-blue\">" ;
                 res += "<div>" + model.Query + "</div>";
                 res += "<div> The target audience:";
-                if (employee) res += "Employees ";
-                if (student && model.employee) res += ",Students ";
+                if (model.employee) res += "Employees ";
+                if (model.student && model.employee) res += ",Students ";
                 else if (student) res += "Students ";
                 if (abitur && (student || employee)) res += ",Abiturients ";
                 else if (abitur) res += "Abiturients ";
@@ -277,9 +278,9 @@ namespace WebApplication2.Controllers
                     return File(memoryStream.ToArray(), "application/pdf");
                 }
 
-
-               
             }
+
+
 
             int Count = 0;
             double vkc = 0;
@@ -415,7 +416,7 @@ namespace WebApplication2.Controllers
                 employer=model.employer,
                 grad=model.grad,
                 nickname=model.nickname,
-                key=model.key,
+                key=key,
                 positive=model.positive,
                 negative=model.negative,
                 neutral=model.neutral,

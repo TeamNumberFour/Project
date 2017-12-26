@@ -21,9 +21,9 @@ namespace WebApplication2.Services
 
         {
             Query =query;
-           // await prof(Uni, Fac);
+           await prof(Uni, Fac);
             await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
-          /*  await vesti();
+            await vesti();
             await regnum();
           
             await news(Uni, Fac);
@@ -31,7 +31,7 @@ namespace WebApplication2.Services
             await VK(50, 21, 0);
             await GetTweets(Uni, Fac);
             await ria(Query);
-            */
+            
 
             return Com.ToArray();
             
@@ -106,8 +106,9 @@ namespace WebApplication2.Services
                 post.ownersName = getNameForPost.FirstName + " " + getNameForPost.LastName;
                 post.link = "https://vk.com/wall" + search[i].OwnerId + "_" + search[i].Id;
                 post.date = search[i].Date.ToString();
-                post.emo = rand.Next(3);
+                
                 post.source = "vk";
+                post.emo = emotion(post.text, post.source);
                 post.pass = true;
                 posts[i] = post;
                 Thread.Sleep(1);
@@ -173,8 +174,9 @@ namespace WebApplication2.Services
                     post.link = newUrl + match.Groups[4].Value;
                     post.text = match.Groups[10].Value;
                     post.ownersName = match.Groups[2].Value;
-                    post.emo = rand.Next(3);
+                   
                     post.source = "prof";
+                    post.emo = emotion(post.text, post.source);
                     post.pass = true;
                     Thread.Sleep(1);
                     posts.Add(post);
@@ -230,8 +232,9 @@ namespace WebApplication2.Services
                     post.link = match.Groups[1].Value;
                     post.text = match.Groups[2].Value;
                     post.ownersName = "noname";
-                    post.emo = rand.Next(3);
+                    
                     post.source = "news.ru";
+                    post.emo = emotion(post.text, post.source);
                     post.pass = true;
                     Thread.Sleep(1);
                     posts.Add(post);
@@ -270,8 +273,9 @@ namespace WebApplication2.Services
                 else
                     post.text = match.Groups[5].Value + Query + match.Groups[6].Value;
                 post.ownersName = "noname";
-                post.emo = rand.Next(3);
+                
                 post.source = "vesti";
+                post.emo = emotion(post.text, post.source);
                 post.pass = true;
                 Thread.Sleep(1);
                 posts.Add(post);
@@ -309,8 +313,9 @@ namespace WebApplication2.Services
                     post.link = match.Groups[1].Value;
                     post.text = match.Groups[3].Value;
                     post.ownersName = "noname";
-                    post.emo = rand.Next(3);
+                   
                     post.source = "regnum";
+                    post.emo = emotion(post.text, post.source);
                     post.pass = true;
                     Thread.Sleep(1);
 
@@ -349,9 +354,10 @@ namespace WebApplication2.Services
                     post.ownersName = match.Groups[5].Value;
                 else
                     post.ownersName = "noname";
-                post.emo = rand.Next(3);
+                
                 post.source = "gazeta";
                 post.pass = true;
+                post.emo = emotion(post.text, post.source);
                 Thread.Sleep(1);
                 posts.Add(post);
             }
@@ -400,8 +406,9 @@ namespace WebApplication2.Services
                 post.link = "https://twitter.com/" + match.Groups[5] + "/status/" + match.Groups[2].Value;
                 post.text = match.Groups[3].Value;
                 post.ownersName = match.Groups[4].Value;
-                post.emo = rand.Next(3);
+                
                 post.source = "twitter";
+                post.emo = emotion(post.text, post.source);
                 post.pass = true;
                 Thread.Sleep(1);
                 posts.Add(post);
@@ -438,8 +445,9 @@ namespace WebApplication2.Services
                     if (match.Groups[3].Value != "")
                         post.text += " " + Query + match.Groups[4].Value;
                     post.ownersName = "noname";
-                    post.emo = rand.Next(3);
                     post.source = "ria";
+                    post.emo = emotion(post.text, post.source);
+                    
                     post.pass = true;
                     posts.Add(post);
                     
@@ -448,7 +456,25 @@ namespace WebApplication2.Services
             }
             Com.AddRange(posts);
         }
+        public int emotion(string text, string source)
+        {
+            Random rand = new Random();
+            switch (source)
+            {
+                case "ria":
+                case "news":
+                case "gazeta":
+                case "regnum":
+                    return 2;
+                    break;
+                default:
+                    if (text.Length > 400) return 3;
+                    else return rand.Next(2);
+                        break;
+            }
 
+
+        }
 
         public string getstr(string str) // new
         {

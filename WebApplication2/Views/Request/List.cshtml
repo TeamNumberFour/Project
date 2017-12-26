@@ -124,6 +124,20 @@
                 <div class="footer-buttons">
                     @if (Model.filtered)    // new
                     { <form asp-area="" asp-controller="Request" asp-action="Filtered" class="fbutton again">
+                          <input type="hidden" asp-for="employee"  id="employees" name="Employee">
+                          <input name="Query" type="hidden" asp-for="Query">
+                          <input type="hidden" asp-for="student"  id="students" name="Student">
+                          <input type="hidden" asp-for="abitur"  id="abiturients" name="Abitur">
+                          <input type="hidden" asp-for="grad"  id="graduates" name="Grad">
+                          <input type="hidden" asp-for="employer"  id="employers" name="Employer">
+                          <input type="hidden" asp-for="nickname" name="Nickname" class="dropdown"  placeholder="Nickname">
+                          <input type="hidden" asp-for="key" name="Key" class="dropdown ss"  placeholder="Key words">
+                          <input type="hidden" asp-for="positive" id="positive" name="Positive">
+                          <input type="hidden" asp-for="negative"  id="negative" name="Negative">
+                          <input type="hidden" asp-for="neutral"  id="neutral" name="Neutral">
+                          <input type="hidden" asp-for="uncertain"  id="uncertain" name="Uncertain">
+                          <input type="hidden" asp-for="data1"  id="from" name="Data1">
+                          <input type="hidden" asp-for="data2"  id="to" name="Data2">
                         <button type="submit" name="export" value="text" class="form__search">Export</button>
 
                     </form>}
@@ -135,7 +149,7 @@
             </div>
             <div class="right-part">
                 <form asp-area="" class="filters" asp-controller="Request" asp-action="Filtered" method="post">
-                    <input type="hidden" asp-for="Query" name="Query">
+                    <input name="Query" type="hidden" asp-for="Query" >
                     <input asp-for="filtered" type="hidden">
                     <input name="Posts" asp-for="Posts" type="hidden">
                     <div class="filters__title">Filters</div>
