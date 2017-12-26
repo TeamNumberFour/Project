@@ -21,9 +21,9 @@ namespace WebApplication2.Services
 
         {
             Query =query;
-            await prof(Uni, Fac);
+           // await prof(Uni, Fac);
             await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
-            await vesti();
+          /*  await vesti();
             await regnum();
           
             await news(Uni, Fac);
@@ -31,7 +31,7 @@ namespace WebApplication2.Services
             await VK(50, 21, 0);
             await GetTweets(Uni, Fac);
             await ria(Query);
-
+            */
 
             return Com.ToArray();
             
@@ -447,6 +447,29 @@ namespace WebApplication2.Services
                 i++;
             }
             Com.AddRange(posts);
+        }
+
+
+        public string getstr(string str) // new
+        {
+
+
+            string reg1 = @".div class..right-part..[\s\S]*.form.[\s\S]*?div.";
+            Regex rgx1 = new Regex(reg1);
+            str = rgx1.Replace(str, " ");
+            reg1 = @".div class..menu..[\s\S]*?.form.[\s\S]*?div.";
+            rgx1 = new Regex(reg1);
+            str = rgx1.Replace(str, " ");
+            reg1 = @"/\*";
+            rgx1 = new Regex(reg1);
+            str = rgx1.Replace(str, " ");
+            reg1 = @"\*/";
+            rgx1 = new Regex(reg1);
+            str = rgx1.Replace(str, " ");
+            reg1 = @".div class..footer-buttons..[\s\S]*?div.";
+            rgx1 = new Regex(reg1);
+            str = rgx1.Replace(str, " ");
+            return str;
         }
 
     }

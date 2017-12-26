@@ -5,10 +5,12 @@
 @{
     ViewData["Title"] = "List";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 
 <div class="bg-blue">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+
     <div class="wrapper">
         <div class="menu">
             <ul class="menu__list-left">
@@ -32,7 +34,7 @@
                         </button>
                     </li>
                 </ul>
-                </form>
+            </form>
         </div>
         <div class="catalog">
             <div class="left-part">
@@ -61,21 +63,22 @@
                         <li class="ec__item">Undefined: <div class="percent percent-uncertain">@ViewBag.uncertainp % <span class="count">(@ViewBag.uncertainc)</span></div></li>
                     </ul>
                 </div>
-                @if (Model.Posts.Count == 0) {
+                @if (Model.Posts.Count == 0)
+                {
                     <h2>No results</h2>
-                 }
+                }
                 <ul class="list">
                     @foreach (var item in Model.Posts)
                     {
-                    <li class="list__item">
-                        <div class="comment">
-                            <div class="list__author">@Html.DisplayFor(modelItem => item.ownersName)</div>
-                            <p class="list__text">@Html.DisplayFor(modelItem => item.text)</p>
-                            <a href=@item.link class="list__link">@item.source</a>
-                        </div>
-                        <div class="coloring">
-                            @if (item.emo == 0)
-                            { <div class="coloring__main">
+                        <li class="list__item">
+                            <div class="comment">
+                                <div class="list__author">@Html.DisplayFor(modelItem => item.ownersName)</div>
+                                <p class="list__text">@Html.DisplayFor(modelItem => item.text)</p>
+                                <a href=@item.link class="list__link">@item.source</a>
+                            </div>
+                            <div class="coloring">
+                                @if (item.emo == 0)
+                                { <div class="coloring__main">
                                 <div class="plus"></div>
                             </div>
                             <div class="other">
@@ -83,8 +86,8 @@
                                 <div class="other__item"><div class="mult"></div></div>
                                 <div class="other__item"><div class="hooks"></div></div>
                             </div>}
-                            @if (item.emo == 1)
-                            { <div class="coloring__main">
+                                @if (item.emo == 1)
+                                { <div class="coloring__main">
                                 <div class="minus"></div>
                             </div>
                             <div class="other">
@@ -92,8 +95,8 @@
                                 <div class="other__item"><div class="mult"></div></div>
                                 <div class="other__item"><div class="hooks"></div></div>
                             </div>}
-                            @if (item.emo == 2)
-                            { <div class="coloring__main">
+                                @if (item.emo == 2)
+                                { <div class="coloring__main">
                                 <div class="mult"></div>
                             </div>
                             <div class="other">
@@ -101,26 +104,29 @@
                                 <div class="other__item"><div class="minus"></div></div>
                                 <div class="other__item"><div class="hooks"></div></div>
                             </div>}
-                            @if (item.emo == 3)
-                            { <div class="coloring__main">
+                                @if (item.emo == 3)
+                                { <div class="coloring__main">
                                 <div class="hooks"></div>
                             </div>
                             <div class="other">
                                 <div class="other__item"><div class="plus"></div></div>
                                 <div class="other__item"><div class="minus"></div></div>
                                 <div class="other__item"><div class="mult"></div></div>
-                                
-                            </div>}
-                            
-                        </div>
 
-                    </li>
+                            </div>}
+
+                            </div>
+
+                        </li>
                     }
-                    
+
                 </ul>
                 <div class="footer-buttons">
-                    @if (Model.filtered)
-                    {<div class="fbutton ">Export</div>}
+                    @if (Model.filtered)    // new
+                    { <form asp-area="" asp-controller="Request" asp-action="Filtered" class="fbutton again">
+                        <button type="submit" name="export" value="text" class="form__search">Export</button>
+
+                    </form>}
                     <a asp-area="" asp-controller="Request" asp-action="Choose" class="fbutton again">Start over</a>
                 </div>
             </div>
@@ -128,32 +134,32 @@
                 <img src="~/images/left.png" alt="">
             </div>
             <div class="right-part">
-                <form  asp-area="" class="filters" asp-controller="Request" asp-action="Filtered" method="post">
-                    <input type="hidden" asp-for="Query">
+                <form asp-area="" class="filters" asp-controller="Request" asp-action="Filtered" method="post">
+                    <input type="hidden" asp-for="Query" name="Query">
                     <input asp-for="filtered" type="hidden">
-                    <input name="Posts" asp-for="Posts" type="hidden" >
+                    <input name="Posts" asp-for="Posts" type="hidden">
                     <div class="filters__title">Filters</div>
                     <div class="filters__item audience">
                         <h3 class="title">The target audience</h3>
                         <div class="aud__checkboxes dropdown">
                             <div class="audience__checkbox">
-                                <input asp-for="employee" type="checkbox" id="employees" name="employee">
+                                <input asp-for="employee" type="checkbox" id="employees" name="Employee">
                                 <label for="employees">Employees</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input asp-for="student" type="checkbox" id="students" name="student">  
+                                <input asp-for="student" type="checkbox" id="students" name="Student">
                                 <label for="students">Students</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input asp-for="abitur" type="checkbox" id="abiturients" name="abiturient">
+                                <input asp-for="abitur" type="checkbox" id="abiturients" name="Abitur">
                                 <label for="abiturients">Abiturients</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input asp-for="grad" type="checkbox" id="graduates" name="graduate"> 
+                                <input asp-for="grad" type="checkbox" id="graduates" name="Grad">
                                 <label for="graduates">Graduates</label>
                             </div>
                             <div class="audience__checkbox">
-                                <input asp-for="employer" type="checkbox" id="employers" name="employer"> 
+                                <input asp-for="employer" type="checkbox" id="employers" name="Employer">
                                 <label for="employers">Employers</label>
                             </div>
                         </div>
@@ -162,7 +168,7 @@
                         <h3 class="title">Nickname</h3>
                         <input asp-for="nickname" name="Nickname" class="dropdown" type="text" placeholder="Nickname">
                     </div>
-                    <div class="filters__item emotions" name="uncertain">
+                    <div class="filters__item emotions" >
                         <h3 class="title">Emotional colouring </h3>
                         <div class="em__checkboxes dropdown">
                             <div class="emotions__checkbox">
@@ -192,11 +198,11 @@
                         <div class="interval dropdown">
                             <div class="from">
                                 <label for="from">From: </label>
-                                <input asp-for="data1" type="date" id="from" name="Data1" >
+                                <input asp-for="data1" type="date" id="from" name="Data1">
                             </div>
                             <div class="to">
                                 <label for="to">To: </label>
-                                <input asp-for="data2" type="date" id="to" name="Data2" >
+                                <input asp-for="data2" type="date" id="to" name="Data2">
                             </div>
                         </div>
                     </div>
@@ -208,10 +214,1013 @@
             </div>
         </div>
     </div>
-</div>
 
-<script>
+    <style>
+        /*
+
+        *, html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        input {
+            outline: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(at bottom, #FEFFFF, #A7CECC);
+            font-family: Roboto;
+        }
+
+        .main-wrapper {
+            position: relative;
+            height: 100vh;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: center;
+            -ms-align-items: center;
+            align-items: center;
+        }
+
+        .menu-un {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            padding: 10px 15px;
+            border-bottom: 1px solid #A7A9FF;
+            background: linear-gradient(to left, #BFEAEA, #A7CECC);
+        }
+
+        .menu__list {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .menu__login {
+            margin-right: 30px;
+            cursor: default;
+            color: #fff;
+        }
+
+        .menu__exit {
+            transition: .4s background;
+        }
+
+
+        .menu__exit-link {
+            color: #fff;
+            transition: .4s color;
+            display: block;
+            padding: 5px 15px;
+        }
+
+        .form {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-un {
+            min-height: 140px;
+        }
+
+        .form__login, .form-control {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #a9a9a9;
+            height: 45px;
+            width: 100%;
+        }
+
+        .form__password {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #a9a9a9;
+        }
+
+        .form__button, .form__search {
+            border: 1px solid #4cb050;
+            background: #4cb050;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+            transition: .4s background, .4s color;
+            text-transform: uppercase;
+            height: 45px;
+            min-width: 40%;
+        }
+
+        .form__user {
+            margin-bottom: 15px;
+            padding: 10px 5px;
+        }
+
+        .log .form {
+            width: 320px;
+            padding: 40px;
+            background: #808080;
+        }
+
+        .log .form__button, .log .form__password {
+            height: 45px;
+            width: 100%;
+        }
+
+        .sign {
+            position: absolute;
+            font-size: 1.4em;
+            bottom: 0;
+            left: 0;
+        }
+
+        .choice {
+        }
+
+        .choice__univer {
+            padding: 10px 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #a9a9a9;
+            margin-right: 10px;
+        }
+
+        .choice__faculty {
+            padding: 10px 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #a9a9a9;
+            margin-left: 10px;
+        }
+
+        .menu__exit:hover, .form__search:hover, .form__button:hover {
+            background: #4beb51;
+            color: #555;
+        }
+
+
+
+        .wrapper {
+            min-height: 100vh;
+        }
+
+        .bg-blue {
+            background: #dcdcdc;
+            background-attachment: fixed;
+        }
+
+        .bg-red {
+            background: radial-gradient(at bottom, #FEFFFF, #FA661E);
+            background-attachment: fixed;
+        }
+
+        .bg-grey {
+            background: radial-gradient(at bottom, #FEFFFF, #B4B3B3);
+            background-attachment: fixed;
+        }
+
+        .bg-green {
+            background: radial-gradient(at bottom, #FEFFFF, #59F359);
+            background-attachment: fixed;
+        }
+
+        .menu {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            padding: 5px 20px;
+            border-bottom: 1px solid #A7A9FF;
+            background: #808080;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .menu .menu__exit-link, .user, .create, .user__update, .user__delete, .fbutton, .fil-b, .btn, .back a {
+                padding: 1px 10px;
+                min-height: 40px;
+                color: #fff;
+                min-width: 110px;
+                border: 1px solid #4cb050;
+                background: #4cb050;
+                cursor: pointer;
+                transition: .4s background;
+                display: flex;
+                font-size: 18px;
+                justify-content: center;
+                align-items: center;
+            }
+
+        .btn {
+            margin: 12px auto 0;
+        }
+
+        .fil-b {
+            font-size: 14px;
+            min-width: 70px;
+        }
+
+        .menu__list-left {
+            min-width: 230px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bg {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+            min-width: 80px;
+        }
+
+        .bg__common {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            background-attachment: scroll;
+        }
+
+        .user {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            transition: .4s color, .4s background;
+            padding: 2px 5px;
+            margin-left: 25px;
+        }
+
+            .user a {
+                color: #fff;
+            }
+
+            .user:hover a {
+                color: #555;
+            }
+
+        .menu__list-right {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .catalog {
+            width: 100%;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+            min-height: 100vh;
+            
+
+            padding-top: 45px;
+        }
+
+        .user:hover, .menu__exit:hover, .form__search:hover, .menu__exit-link:hover, .create:hover, .user__update:hover, .user__delete:hover, .fbutton:hover, .fil-b:hover, .btn:hover, .back a:hover {
+            background: #4beb51;
+            color: #555;
+        }
+
+            .menu__exit:hover .menu__exit-link, .form__search:hover {
+            }
+
+        .left-part {
+            width: 95%;
+            border-bottom: none;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 60px;
+            margin-left: 6px;
+            
+            margin-top: 5px;
+        }
+
+                .diagrams {
+                    padding: 20px;
+                    display: -webkit-flex;
+                    display: -moz-flex;
+                    display: -ms-flex;
+                    display: -o-flex;
+                    display: -webkit-box;
+                    justify-content: space-around;
+                    border: 1px solid #000;
+                    margin-bottom: 5px;
+                }
+
+            .diagrams img {
+            }
+
+        .diagr {
+            position: relative;
+        }
+
+        .vk {
+            position: absolute;
+            top: 51px;
+            left: 16px;
+        }
+
+        .twitter {
+            position: absolute;
+            top: 71px;
+            right: 10px;
+        }
+
+        .facebook {
+            position: absolute;
+            top: 27px;
+            right: 26px;
+        }
+
+        .instagram {
+            position: absolute;
+            top: 95px;
+            right: 34px;
+        }
+
+        .positive {
+            position: absolute;
+            top: 17px;
+            right: 28px;
+            font-size: 2em;
+        }
+
+        .negative {
+            position: absolute;
+            top: 42px;
+            left: 29px;
+            font-size: 2em;
+        }
+
+        .neutral {
+            position: absolute;
+            top: 89px;
+            right: 44px;
+            font-size: 2em;
+        }
+
+        .uncertain {
+            position: absolute;
+            top: 67px;
+            right: 8px;
+            font-size: 1.5em;
+        }
+
+        .source {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            position: relative;
+        }
+
+        .count {
+            font-size: 1.1em;
+            padding-bottom: 3px;
+            color: #1D2E6E;
+            border-bottom: 1px solid #8FA2AC;
+            margin-left: 15px;
+        }
+
+        .source__item {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            -ms-align-items: center;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .add {
+            display: none;
+        }
+
+
+        .percent {
+            margin-left: 5px;
+            font-size: 1.3em;
+            color: #161626;
+        }
+
+        .viewAll {
+            font-size: 0.8em;
+            margin-top: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .percent-vk {
+        }
+
+        .percent-twitter {
+        }
+
+        .percent-fb {
+        }
+
+        .percent-inst {
+        }
+
+        .emotion-color {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            max-height: 140px;
+        }
+
+        .ec__item {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            align-items: center;
+        }
+
+
+
+
+        .list {
+            border: 1px solid #000;
+        }
+
+        .list__item {
+            border-top: 1px solid #3E6369;
+            padding: 15px 25px;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: -webkit-box;
+            justify-content: space-between;
+        }
+
+            .list__item:first-of-type {
+                border: none;
+            }
+
+        .comment {
+            width: 90%;
+        }
+
+        .list__author {
+            font-size: 0.8em;
+            color: #808080;
+            display: inline-block;
+            border-bottom: 1px solid #8FA2AC;
+            padding-bottom: 3px;
+        }
+
+        .list__text {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.4em;
+            overflow: hidden;
+            line-height: 1.3em;
+        }
+
+        .read_more {
+            cursor: pointer;
+            border-bottom: 2px solid #A0AFB7;
+            border-radius: 5px;
+            font-size: 2em;
+            color: #3A2D64;
+        }
+
+        .hide {
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.8em;
+            border: 1px solid #A0AFB7;
+            background: #A4A4A4;
+            border-radius: 4px;
+        }
+
+
+
+        .list__item:nth-of-type(2) .list__text::after, .list__item:last-of-type .list__text::after {
+            content: '';
+        }
+
+        .list__link {
+            font-size: 1.2em;
+            color: #4cb050;
+            padding-bottom: 2px;
+        }
+
+            .list__link:hover {
+                border-bottom: 1px solid #8B7D7D;
+            }
+
+        .coloring {
+            width: 10%;
+            min-height: 120px;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: default;
+            position: relative;
+        }
+
+        .coloring__main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #978E8E;
+            height: 30px;
+            width: 30px;
+        }
+
+        .plus {
+        }
+
+            .plus::before {
+                content: '+';
+            }
+
+        .minus {
+            padding-bottom: 4px;
+        }
+
+            .minus::before {
+                content: '-';
+            }
+
+        .mult {
+            padding-top: 7px;
+        }
+
+            .mult::before {
+                content: '*';
+            }
+
+        .hooks {
+            font-size: 0.8em;
+            padding: 4px 0;
+        }
+
+            .hooks::before {
+                content: '<>';
+            }
+
+        .other {
+            flex-direction: column;
+            position: absolute;
+            font-size: 0.76em;
+            top: 32px;
+            background: rgba(0,0,0,.2);
+            border-radius: 3px;
+            padding: 2px;
+            border: none;
+            display: none;
+        }
+
+        .other__item {
+            min-width: 27px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #000;
+        }
+
+            .other__item:last-of-type {
+                border-bottom: none;
+            }
+
+            .other__item:hover {
+                background: #E4E4E4;
+                cursor: pointer;
+            }
+
+        .footer-buttons {
+            position: fixed;
+            bottom: 0;
+            width: calc(95% - 2px);
+            left: 7px;
+            background: rgba(255, 255,255,.5);
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .fbutton {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+
+        .arrow {
+            position: fixed;
+            top: 50px;
+            right: 0;
+            width: 60px;
+            z-index: 10;
+        }
+
+            .arrow > img {
+                width: 100%;
+                cursor: pointer;
+            }
+
+        .rotate {
+            -moz-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                    -webkit-transform: rotate(180deg);
+                    -o-transform: rotate(180deg);
+                    transform: rotate(180deg);
+        }
+
+        .export {
+            display: none;
+        }
+
+        .again {
+        }
+
+        .right-part {
+            position: fixed;
+            right: -310px;
+            margin-top: 5px;
+        }
+
+        .filters {
+            padding: 0 35px;
+            top: 33px;
+            border: 1px solid #768DBB;
+            height: 100vh;
+            font-size: 0.95em;
+            overflow: auto;
+        }
+
+            .filters input[type="text"], .interval input {
+                padding: 5px 10px;
+                width: 100%;
+                border-radius: 3px;
+                border: 1px solid #a9a9a9;
+                box-shadow: 1px 1px 3px 0 #7A7A7A;
+            }
+
+            .filters input[type="checkbox"] {
+            }
+
+        .filters__item {
+            margin: 6px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #A0AFB7;
+        }
+
+            .filters__item:last-of-type {
+                border: none;
+            }
+
+        .filters__title {
+            color: #555;
+            font-size: 2em;
+            width: 55%;
+            border-bottom: 2px solid #808080;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .title {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 7px;
+            cursor: default;
+        }
+
+        .aud__checkboxes {
+        }
+
+        .dropdown {
+            display: none;
+        }
+
+        .audience {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .audience__checkbox {
+            margin-top: 7px;
+            color: #444;
+        }
+
+            .audience__checkbox:first-child {
+                margin: 0;
+            }
+
+        .emloyees {
+        }
+
+        .students {
+        }
+
+        .abiturients {
+        }
+
+        .graduates {
+        }
+
+        .employers {
+        }
+
+        .nickname {
+        }
+
+        .emotions {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .emotions__checkbox {
+            margin-top: 7px;
+            color: #444;
+        }
+
+
+        .keywords {
+        }
+
+        .hashtags {
+        }
+
+        .data {
+        }
+
+        .interval {
+        }
+
+            .interval input {
+                width: 80%;
+            }
+
+        .from {
+            margin-bottom: 20px;
+        }
+
+        .to {
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .filters__button {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .submit {
+            font-family: Arial;
+        }
+
+
+        .modal_close {
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            display: block;
+        }
+
+        .modal_form {
+            width: 300px;
+            height: 192px;
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            opacity: 0;
+            margin-top: -96px;
+            margin-left: -150px;
+            display: none;
+            background: #CCCCD8;
+            padding: 30px 10px;
+            z-index: 35;
+            box-sizing: border-box;
+            color: #191B6A;
+        }
+
+            .modal_form input {
+                padding: 5px 10px;
+                width: 100%;
+                border-radius: 3px;
+                border: 1px solid #a9a9a9;
+                box-shadow: 1px 1px 3px 0 #7A7A7A;
+                margin-bottom: 10px;
+            }
+
+        .overlay {
+            cursor: pointer;
+            background: #000;
+            opacity: 0.7;
+            width: 100%;
+            z-index: 33;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .accept, .upd {
+            padding: 3px 7px;
+            border: 1px solid;
+            border-radius: 3px;
+            width: 40%;
+            text-align: center;
+            margin: 10px auto;
+            cursor: pointer;
+            transition: .4s background, .4s color;
+            font-size: 1.2em;
+        }
+
+            .upd:hover, .accept:hover {
+                background: #191B6A;
+                color: #fff;
+            }
+
+        .content {
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            padding-top: 60px;
+        }
+
+
+        .user-item {
+            display: flex;
+            padding: 10px 15px;
+            border-bottom: 1px solid #6368CB;
+            font-size: 1.5em;
+            align-items: center;
+        }
+
+        .user__number {
+            margin-right: 20px;
+        }
+
+        .other-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inf {
+            width: 35%;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 30px;
+            align-items: center;
+        }
+
+        .remake {
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .user__login {
+        }
+
+        .user__password {
+        }
+
+        .create, .user__update, .user__delete {
+        }
+
+        .create {
+            margin: 10px 0;
+            width: 10%;
+            text-align: center;
+        }
+
+            .create:hover, .user__update:hover, .user__delete:hover {
+            }
+
+        .user__update {
+        }
+
+        .user__delete {
+        }
+
+        .form-group, .form-horizontal {
+            width: 100%;
+        }
+
+        h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        #timer {
+            font-size: 30px;
+            position: absolute;
+            right: 25px;
+            bottom: 10px;
+            padding: 15px;
+            border: 2px solid #4cb050;
+            opacity: 0;
+        }
+
+                    */
+        #jqstooltip {
+            box-sizing: initial;
+        }
+    </style>
+
+
+
+    <script>
  // Это в конец вьюшки List
+
+        $(document).ready(function () { // new
+            $('.form__search').click(function (e) {
+
+                var a = $('.bg-blue').html();
+                console.log(a);
+                $(this).val(a);
+            });
+        });
+
+
 
           var values = [@ViewBag.vkc,@ViewBag.gazetac, @ViewBag.regnumc, @ViewBag.vestic, @ViewBag.profc, @ViewBag.newsc, @ViewBag.twitc, @ViewBag.riac]; // сюда значения
 
@@ -252,9 +1261,5 @@
                 }
             });
 
-</script>
-<style>
-    #jqstooltip {
-        box-sizing: initial;
-    }
-</style>
+    </script>
+</div>

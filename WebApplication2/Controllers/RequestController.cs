@@ -17,6 +17,11 @@ using WebApplication2.Services;
 using Microsoft.EntityFrameworkCore;
 using VkNet.Utils;
 using Shark.PdfConvert;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.IO;
+
+
 namespace WebApplication2.Controllers
 {
     [Authorize]
@@ -220,8 +225,62 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Filtered(List model)
+        public async Task<IActionResult> Filtered(List model, string query, string export, string nickname, bool employer, bool grad, bool abitur, bool student, bool employee, bool neutral, bool negative, bool positive, bool uncertain, string data1, string data2, string key)
         {
+
+            if (export != null)
+            {
+                export = this.parsingService.getstr(export);
+                var res = "<!DOCTYPE html> <html lang=\"ru\"> <head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/> </head> " + "<div class=\"bg-blue\">" ;
+                res += "<div>" + model.Query + "</div>";
+                res += "<div> The target audience:";
+                if (employee) res += "Employees ";
+                if (student && model.employee) res += ",Students ";
+                else if (student) res += "Students ";
+                if (abitur && (student || employee)) res += ",Abiturients ";
+                else if (abitur) res += "Abiturients ";
+                if (grad && (abitur || student || employee)) res += ",Graduates ";
+                else if (grad) res += "Graduates ";
+                if (employer && (grad || abitur || student || employee)) res += ",Employers ";
+                else if (employer) res += "Employers ";
+                res += "</div>";
+                res += "<div> Emotional colouring:";
+
+                if (positive) res += "Positive  ";
+                if (negative && positive) res += ",Negative  ";
+                else if (negative) res += "Negative  ";
+                if (neutral && (negative || positive)) res += ",Neutral  ";
+                else if (neutral) res += "Neutral  ";
+                if (uncertain && (neutral || negative || positive)) res += ",Undefined  ";
+                else if (uncertain) res += "Undefined  ";
+                res += "</div>";
+
+
+                res += "<div> Key words - " + key + "</div>";
+
+                if(data1 != "01.01.0001")
+                res += "<div> From - " + data1 + " To - " + data2 + "</div>";
+
+
+                res += export + "</div></html>";
+
+                var convertSettings = new PdfConversionSettings()
+                {
+                    PdfToolPath = Path.Combine(Directory.GetCurrentDirectory(),
+           "wkhtmltopdf.exe"),
+                    Title = "Salg",
+                    Content = res
+                };
+                using (var memoryStream = new MemoryStream())
+                {
+                    PdfConvert.Convert(convertSettings, memoryStream);
+                    return File(memoryStream.ToArray(), "application/pdf");
+                }
+
+
+               
+            }
+
             int Count = 0;
             double vkc = 0;
             double gazetac = 0;

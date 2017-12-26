@@ -10,6 +10,6 @@ namespace WebApplication2.Services
     {
          
          Task<Post[]> Common(string query, string Un, string Fa);
-
+        string getstr(string str); // new
     }
 }
