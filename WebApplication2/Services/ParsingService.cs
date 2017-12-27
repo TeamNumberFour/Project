@@ -28,7 +28,7 @@ namespace WebApplication2.Services
           
             await news(Uni, Fac);
             
-            await VK(50, 21, 0);
+            //await VK(50, 21, 0);
             await GetTweets(Uni, Fac);
             await ria(Query);
             
@@ -469,7 +469,13 @@ namespace WebApplication2.Services
                     break;
                 default:
                     if (text.Length > 400) return 3;
-                    else return rand.Next(2);
+                    else
+                    {
+                        if (text.Contains("Уважаемый")) return 0;
+                        if (text.Contains('!')) return rand.Next(2);
+                        if (text.Contains(')') && (source=="vk"|| source =="twitter")) return 0;
+                        return 2;
+                    }
                         break;
             }
 

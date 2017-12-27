@@ -21,8 +21,8 @@
                 </li>
                 @if (User.IsInRole(ApplicationRoles.Administrators))
                 {
-                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
-                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">@ViewBag.Us</a></li>
+                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">@ViewBag.Uns</a></li>
                 }
             </ul>
             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
@@ -30,7 +30,7 @@
                     <li class="menu__login">@UserManager.GetUserName(User)</li>
                     <li class="menu__exit">
                         <button type="submit" class="menu__exit-link">
-                            Log out
+                            @ViewBag.Logout
                         </button>
                     </li>
                 </ul>
@@ -57,10 +57,10 @@
 
                     </div>
                     <ul class="emotion-color">
-                        <li class="ec__item">Negative: <div class="percent percent-negative">@ViewBag.negativep % <span class="count">(@ViewBag.negativec)</span></div></li>
-                        <li class="ec__item">Neutral: <div class="percent percent-neutral">@ViewBag.neutralp % <span class="count">(@ViewBag.neutralc)</span></div></li>
-                        <li class="ec__item">Positive: <div class="percent percent-positive">@ViewBag.positivep % <span class="count">(@ViewBag.positivec)</span></div></li>
-                        <li class="ec__item">Undefined: <div class="percent percent-uncertain">@ViewBag.uncertainp % <span class="count">(@ViewBag.uncertainc)</span></div></li>
+                        <li class="ec__item">@ViewBag.Negative: <div class="percent percent-negative">@ViewBag.negativep % <span class="count">(@ViewBag.negativec)</span></div></li>
+                        <li class="ec__item">@ViewBag.Neutral: <div class="percent percent-neutral">@ViewBag.neutralp % <span class="count">(@ViewBag.neutralc)</span></div></li>
+                        <li class="ec__item">@ViewBag.Positive: <div class="percent percent-positive">@ViewBag.positivep % <span class="count">(@ViewBag.positivec)</span></div></li>
+                        <li class="ec__item">@ViewBag.Undefined: <div class="percent percent-uncertain">@ViewBag.uncertainp % <span class="count">(@ViewBag.uncertainc)</span></div></li>
                     </ul>
                 </div>
                 @if (Model.Posts.Count == 0)
@@ -138,10 +138,10 @@
                           <input type="hidden" asp-for="uncertain"  id="uncertain" name="Uncertain">
                           <input type="hidden" asp-for="data1"  id="from" name="Data1">
                           <input type="hidden" asp-for="data2"  id="to" name="Data2">
-                        <button type="submit" name="export" value="text" class="form__search">Export</button>
+                        <button type="submit" name="export" value="text" class="form__search">@ViewBag.Export</button>
 
                     </form>}
-                    <a asp-area="" asp-controller="Request" asp-action="Choose" class="fbutton again">Start over</a>
+                    <a asp-area="" asp-controller="Request" asp-action="Choose" class="fbutton again">@ViewBag.Startover</a>
                 </div>
             </div>
             <div class="arrow">
@@ -152,77 +152,77 @@
                     <input name="Query" type="hidden" asp-for="Query" >
                     <input asp-for="filtered" type="hidden">
                     <input name="Posts" asp-for="Posts" type="hidden">
-                    <div class="filters__title">Filters</div>
+                    <div class="filters__title">@ViewBag.Filters</div>
                     <div class="filters__item audience">
-                        <h3 class="title">The target audience</h3>
+                        <h3 class="title">@ViewBag.Target </h3>
                         <div class="aud__checkboxes dropdown">
                             <div class="audience__checkbox">
                                 <input asp-for="employee" type="checkbox" id="employees" name="Employee">
-                                <label for="employees">Employees</label>
+                                <label for="employees">@ViewBag.Emp1</label>
                             </div>
                             <div class="audience__checkbox">
                                 <input asp-for="student" type="checkbox" id="students" name="Student">
-                                <label for="students">Students</label>
+                                <label for="students">@ViewBag.Stu</label>
                             </div>
                             <div class="audience__checkbox">
                                 <input asp-for="abitur" type="checkbox" id="abiturients" name="Abitur">
-                                <label for="abiturients">Abiturients</label>
+                                <label for="abiturients">@ViewBag.Ab</label>
                             </div>
                             <div class="audience__checkbox">
                                 <input asp-for="grad" type="checkbox" id="graduates" name="Grad">
-                                <label for="graduates">Graduates</label>
+                                <label for="graduates">@ViewBag.Grad</label>
                             </div>
                             <div class="audience__checkbox">
                                 <input asp-for="employer" type="checkbox" id="employers" name="Employer">
-                                <label for="employers">Employers</label>
+                                <label for="employers">@ViewBag.Emp2</label>
                             </div>
                         </div>
                     </div>
                     <div class="filters__item nickname">
-                        <h3 class="title">Nickname</h3>
-                        <input asp-for="nickname" name="Nickname" class="dropdown" type="text" placeholder="Nickname">
+                        <h3 class="title">@ViewBag.Nick</h3>
+                        <input asp-for="nickname" name="Nickname" class="dropdown" type="text" placeholder=@ViewBag.Nick>
                     </div>
                     <div class="filters__item emotions" >
-                        <h3 class="title">Emotional colouring </h3>
+                        <h3 class="title">@ViewBag.Em </h3>
                         <div class="em__checkboxes dropdown">
                             <div class="emotions__checkbox">
                                 <input asp-for="positive" type="checkbox" id="positive" name="Positive">
-                                <label for="positive">Positive (+)</label>
+                                <label for="positive">@ViewBag.Positive (+)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input asp-for="negative" type="checkbox" id="negative" name="Negative">
-                                <label for="negative">Negative (-)</label>
+                                <label for="negative">@ViewBag.Negative (-)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input asp-for="neutral" type="checkbox" id="neutral" name="Neutral">
-                                <label for="neutral">Neutral (*)</label>
+                                <label for="neutral">@ViewBag.Neutral (*)</label>
                             </div>
                             <div class="emotions__checkbox">
                                 <input asp-for="uncertain" type="checkbox" id="uncertain" name="Uncertain">
-                                <label for="uncertain">Undefined (<>)</label>
+                                <label for="uncertain">@ViewBag.Undefined (<>)</label>
                             </div>
                         </div>
                     </div>
                     <div class="filters__item keywords">
-                        <h3 class="title">Key words</h3>
-                        <input asp-for="key" name="Key" class="dropdown ss" type="text" placeholder="Key words">
+                        <h3 class="title">@ViewBag.Key </h3>
+                        <input asp-for="key" name="Key" class="dropdown ss" type="text" placeholder=@ViewBag.Key>
                     </div>
                     <div class="filters__item data">
-                        <h3 class="title">Time interval</h3>
+                        <h3 class="title">@ViewBag.Time</h3>
                         <div class="interval dropdown">
                             <div class="from">
-                                <label for="from">From: </label>
+                                <label for="from">@ViewBag.From : </label>
                                 <input asp-for="data1" type="date" id="from" name="Data1">
                             </div>
                             <div class="to">
-                                <label for="to">To: </label>
+                                <label for="to">@ViewBag.To : </label>
                                 <input asp-for="data2" type="date" id="to" name="Data2">
                             </div>
                         </div>
                     </div>
                     <div class="filters__button">
                         <input type="reset" class="fil-b reset">
-                        <button type="submit" class="fil-b submit">Accept</button>
+                        <button type="submit" class="fil-b submit">@ViewBag.Accept</button>
                     </div>
                 </form>
             </div>

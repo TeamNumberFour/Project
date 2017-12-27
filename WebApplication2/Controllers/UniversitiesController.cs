@@ -25,6 +25,13 @@ namespace WebApplication2.Controllers
         // GET: Universities
         public async Task<IActionResult> Index()
         {
+            ViewBag.Logout = "Выйти";
+            ViewBag.Us = "Пользователи";
+            ViewBag.Create = "Добавить";
+            ViewBag.Faculties = "Факультеты";
+            ViewBag.Edit = "Изменить";
+            ViewBag.Delete = "Удалить";
+            ViewBag.Search = "Поиск";
             return View(await _context.Universities.ToListAsync());
         }
 

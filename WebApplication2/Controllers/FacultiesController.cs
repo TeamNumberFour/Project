@@ -25,6 +25,13 @@ namespace WebApplication2.Controllers
         // GET: Faculties
         public async Task<IActionResult> Index(Guid? UniversityId)
         {
+            ViewBag.Logout = "Выйти";
+            ViewBag.Us = "Пользователи";
+            ViewBag.Uns = "Университеты";
+            ViewBag.Create = "Добавить";
+            ViewBag.Edit = "Изменить";
+            ViewBag.Delete = "Удалить";
+            ViewBag.Search = "Поиск";
             if (UniversityId == null)
             {
                 return this.NotFound();

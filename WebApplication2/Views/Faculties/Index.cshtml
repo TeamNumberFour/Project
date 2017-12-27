@@ -15,15 +15,15 @@
                     <div class="bg__common bg-grey"></div>
                     <div class="bg__common bg-green"></div>
                 </li>
-                <li class="user"><a asp-area="" asp-controller="Request" asp-action="Choose">Search</a></li>
+                <li class="user"><a asp-area="" asp-controller="Request" asp-action="Choose">@ViewBag.Search</a></li>
                 @if (User.IsInRole(ApplicationRoles.Administrators))
                 {
-                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
-                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>}
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">@ViewBag.Us</a></li>
+                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">@ViewBag.Uns</a></li>}
             </ul>
             <ul class="menu__list-right">
                 <li class="menu__login">@UserManager.GetUserName(User)</li>
-                <li class="menu__exit"><a href="index.html" class="menu__exit-link">Log out</a></li>
+                <li class="menu__exit"><a href="index.html" class="menu__exit-link">@ViewBag.Logout</a></li>
             </ul>
         </div>
         <div class="modal_form">
@@ -34,7 +34,7 @@
         <div class="overlay"></div>
         <div class="content">
             <h2>@ViewBag.University.Title</h2>
-            <a class="create" asp-area=""asp-action="Create" asp-route-UniversityId="@ViewBag.University.Id">Create</a>
+            <a class="create" asp-area=""asp-action="Create" asp-route-UniversityId="@ViewBag.University.Id">@ViewBag.Create</a>
             @{int i = 0; }
             @foreach (var item in Model.OrderBy(x => x.Title))
             {
@@ -48,8 +48,8 @@
                             
                         </div>
                         <div class="remake">
-                            <a class="user__update" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <form asp-action="Delete" asp-route-id="@item.Id"><input class="user__delete" type="submit" value="Delete" />  </form>
+                            <a class="user__update" asp-action="Edit" asp-route-id="@item.Id">@ViewBag.Edit</a>
+                            <form asp-action="Delete" asp-route-id="@item.Id"><input class="user__delete" type="submit" value= @ViewBag.Delete>  </form>
                         </div>
                     </div>
                 </div>

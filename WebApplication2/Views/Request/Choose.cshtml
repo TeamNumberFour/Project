@@ -18,15 +18,15 @@
                 </li>
                 @if (User.IsInRole(ApplicationRoles.Administrators))
                 {
-                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
-                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">Universities</a></li>}
+                    <li class="user"><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">@ViewBag.Us</a></li>
+                    <li class="user"><a asp-area="" asp-controller="Universities" asp-action="Index">@ViewBag.Uns</a></li>}
             </ul>
             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
                 <ul class="menu__list">
                     <li class="menu__login">@UserManager.GetUserName(User)</li>
                     <li class="menu__exit">
                         <button type="submit" class="menu__exit-link">
-                            Log out
+                            @ViewBag.Logout
                         </button>
                     </li>
                 </ul>
@@ -36,13 +36,13 @@
         <form id="cho" class="form" asp-action="Choose" method="post">
             <div class="choice">
                
-                <input name="Un" asp-for="University" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder="University">
+                <input name="Un" asp-for="University" autofocus="autofocus" list="univer-list" class="choice__univer" type="text" placeholder=@ViewBag.Un>
                 <datalist  id="univer-list">
                     @foreach (var item in Model.Universities)
                         {<option>@Html.DisplayFor(modelItem => item.Title)</option>}
                 </datalist>
                 <button hidden></button>
-                <input name="Fa" asp-for="Faculty" class="choice__faculty" list="faculty-list" type="text" placeholder="Faculty">
+                <input name="Fa" asp-for="Faculty" class="choice__faculty" list="faculty-list" type="text" placeholder=@ViewBag.Fa>
                 <datalist id="faculty-list">
                     @foreach (var item1 in Model.Faculties)
                     {
@@ -53,7 +53,7 @@
                 </datalist>
             </div>
 
-            <button type="submit" name="Locker" value="True" class="form__search">Find</button>
+            <button type="submit" name="Locker" value="True" class="form__search">@ViewBag.Find</button>
         </form>
     </div>
 </div>

@@ -64,7 +64,12 @@ namespace WebApplication2.Controllers
             
             var Univer = await this.context.Universities.ToListAsync();
             var Faculty= await this.context.Faculties.ToListAsync();
-
+            ViewBag.Logout = "Выйти";
+            ViewBag.Find = "Найти";
+            ViewBag.Un = "Университет";
+            ViewBag.Fa = "Факультет";
+            ViewBag.Uns = "Университеты";
+            ViewBag.Us = "Пользователи";
 
 
 
@@ -101,7 +106,32 @@ namespace WebApplication2.Controllers
                 this.ViewBag.University = un;
                 return this.View(model1);
             }
-            
+            ViewBag.Logout = "Выйти";
+            ViewBag.Us = "Пользователи";
+            ViewBag.Uns = "Университеты";
+            ViewBag.Negative = "Отрицательные";
+            ViewBag.Neutral = "Нейтральные";
+            ViewBag.Positive = "Положительные";
+            ViewBag.Undefined = "Неопределённые";
+            ViewBag.Export = "Сохранить";
+            ViewBag.Startover = "Начать заново";
+            ViewBag.Filters = "Фильтры";
+            ViewBag.Target = "Целевая аудитория";
+            ViewBag.Emp1 = "Работники";
+            ViewBag.Emp2 = "Работодатели";
+            ViewBag.Stu = "Студенты";
+            ViewBag.Ab = "Абитуриенты";
+            ViewBag.Grad = "Выпускники";
+            ViewBag.Nick = "Имя пользователя";
+            ViewBag.Em = "Эмоциональная окраска";
+            ViewBag.Key = "Ключевые слова";
+            ViewBag.Time = "Временной промежуток";
+            ViewBag.From = "От";
+            ViewBag.To = "До";
+            ViewBag.Accept = "Принять";
+
+
+
             Post[] posts =await parsingService.Common(un + " " + fa, un, fa);
             
                 var itemsToDelete = context.Set<Post>();
@@ -227,6 +257,29 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Filtered(List model, string query, string export, string nickname, bool employer, bool grad, bool abitur, bool student, bool employee, bool neutral, bool negative, bool positive, bool uncertain, string data1, string data2, string key)
         {
+            ViewBag.Logout = "Выйти";
+            ViewBag.Us = "Пользователи";
+            ViewBag.Uns = "Университеты";
+            ViewBag.Negative = "Отрицательные";
+            ViewBag.Neutral = "Нейтральные";
+            ViewBag.Positive = "Положительные";
+            ViewBag.Undefined = "Неопределённые";
+            ViewBag.Export = "Сохранить";
+            ViewBag.Startover = "Начать заново";
+            ViewBag.Filters = "Фильтры";
+            ViewBag.Target = "Целевая аудитория";
+            ViewBag.Emp1 = "Работники";
+            ViewBag.Emp2 = "Работодатели";
+            ViewBag.Stu = "Студенты";
+            ViewBag.Ab = "Абитуриенты";
+            ViewBag.Grad = "Выпускники";
+            ViewBag.Nick = "Имя пользователя";
+            ViewBag.Em = "Эмоциональная окраска";
+            ViewBag.Key = "Ключевые слова";
+            ViewBag.Time = "Временной промежуток";
+            ViewBag.From = "От";
+            ViewBag.To = "До";
+            ViewBag.Accept = "Принять";
 
 
             if (export != null)
@@ -234,33 +287,33 @@ namespace WebApplication2.Controllers
                 export = this.parsingService.getstr(export);
                 var res = "<!DOCTYPE html> <html lang=\"ru\"> <head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/> </head> " + "<div class=\"bg-blue\">" ;
                 res += "<div>" + model.Query + "</div>";
-                res += "<div> The target audience:";
-                if (model.employee) res += "Employees ";
-                if (model.student && model.employee) res += ",Students ";
+                res += "<div> Целевая аудитория:";
+                if (model.employee) res += "Работники ";
+                if (model.student && model.employee) res += ",Студенты ";
                 else if (student) res += "Students ";
-                if (abitur && (student || employee)) res += ",Abiturients ";
+                if (abitur && (student || employee)) res += ",Абитуриенты ";
                 else if (abitur) res += "Abiturients ";
-                if (grad && (abitur || student || employee)) res += ",Graduates ";
+                if (grad && (abitur || student || employee)) res += ",Выпускники ";
                 else if (grad) res += "Graduates ";
-                if (employer && (grad || abitur || student || employee)) res += ",Employers ";
-                else if (employer) res += "Employers ";
+                if (employer && (grad || abitur || student || employee)) res += ",Работодатели ";
+                else if (employer) res += "Работодатели ";
                 res += "</div>";
-                res += "<div> Emotional colouring:";
+                res += "<div> Эмоциональная окраска:";
 
-                if (positive) res += "Positive  ";
-                if (negative && positive) res += ",Negative  ";
-                else if (negative) res += "Negative  ";
-                if (neutral && (negative || positive)) res += ",Neutral  ";
-                else if (neutral) res += "Neutral  ";
-                if (uncertain && (neutral || negative || positive)) res += ",Undefined  ";
-                else if (uncertain) res += "Undefined  ";
+                if (positive) res += "Положительные  ";
+                if (negative && positive) res += ",Отрицательные  ";
+                else if (negative) res += "Отрицательные  ";
+                if (neutral && (negative || positive)) res += ",Нейтральные  ";
+                else if (neutral) res += "Нейтральные  ";
+                if (uncertain && (neutral || negative || positive)) res += ",Неопределённые  ";
+                else if (uncertain) res += "Неопределённые  ";
                 res += "</div>";
 
 
-                res += "<div> Key words - " + key + "</div>";
+                res += "<div> Ключевые слова - " + key + "</div>";
 
                 if(data1 != "01.01.0001")
-                res += "<div> From - " + data1 + " To - " + data2 + "</div>";
+                res += "<div> От - " + data1 + " До - " + data2 + "</div>";
 
 
                 res += export + "</div></html>";
