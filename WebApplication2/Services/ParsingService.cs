@@ -21,14 +21,14 @@ namespace WebApplication2.Services
 
         {
             Query =query;
-           await prof(Uni, Fac);
+            await prof(Uni, Fac);
             await Gazeta(DateTime.Now.AddDays(-21).Date.ToString("dd.MM.yy"), "");
             await vesti();
             await regnum();
           
             await news(Uni, Fac);
             
-            //await VK(50, 21, 0);
+            await VK(50, 21, 0);
             await GetTweets(Uni, Fac);
             await ria(Query);
             

@@ -93,6 +93,12 @@ namespace WebApplication2.Controllers
         {
             if (!locker)
             {
+                ViewBag.Logout = "Выйти";
+                ViewBag.Find = "Найти";
+                ViewBag.Un = "Университет";
+                ViewBag.Fa = "Факультет";
+                ViewBag.Uns = "Университеты";
+                ViewBag.Us = "Пользователи";
                 var Univer = await this.context.Universities.ToListAsync();
                 var Faculty = await this.context.Faculties.ToListAsync();
                 var model1 = new Choose
@@ -226,18 +232,18 @@ namespace WebApplication2.Controllers
             this.ViewBag.negativec = negativec;
             this.ViewBag.neutralc = neutralc;
             this.ViewBag.uncertainc = uncertainc;
-            ViewBag.vkp = (int)( vkc / Count * 100);
-            ViewBag.riap = (int)(riac / Count * 100);
-            ViewBag.newsp = (int)(newsc / Count * 100);
-            ViewBag.twitp = (int)(twitc / Count * 100);
-            ViewBag.gazetap = (int)(gazetac / Count * 100);
-            ViewBag.vestip = (int)(vestic / Count * 100);
-            ViewBag.profp = (int)(profc / Count * 100);
-            ViewBag.regnump = (int)(regnumc / Count * 100);
-            ViewBag.positivep = (int)(positivec / Count * 100);
-            ViewBag.negativep = (int)(negativec / Count * 100);
-            ViewBag.neutralp = (int)(neutralc / Count * 100);
-            ViewBag.uncertainp = (int)(uncertainc / Count * 100);
+            if (vkc > 0) ViewBag.vkp = (int)(vkc / Count * 100); else ViewBag.vkp = 0;
+            if (riac > 0) ViewBag.riap = (int)(riac / Count * 100); else ViewBag.riap = 0;
+            if (newsc > 0) ViewBag.newsp = (int)(newsc / Count * 100); else ViewBag.newsp = 0;
+            if (twitc > 0) ViewBag.twitp = (int)(twitc / Count * 100); else ViewBag.twitp = 0;
+            if (gazetac > 0) ViewBag.gazetap = (int)(gazetac / Count * 100); else ViewBag.gazetap = 0;
+            if (vestic > 0) ViewBag.vestip = (int)(vestic / Count * 100); else ViewBag.vestip = 0;
+            if (profc > 0) ViewBag.profp = (int)(profc / Count * 100); else ViewBag.profp = 0;
+            if (regnumc > 0) ViewBag.regnump = (int)(regnumc / Count * 100); else ViewBag.regnump = 0;
+            if (positivec > 0) ViewBag.positivep = (int)(positivec / Count * 100); else ViewBag.positivep = 0;
+            if (negativec > 0) ViewBag.negativep = (int)(negativec / Count * 100); else ViewBag.negativep = 0;
+            if (neutralc > 0) ViewBag.neutralp = (int)(neutralc / Count * 100); else ViewBag.neutralp = 0;
+            if (uncertainc > 0) ViewBag.uncertainp = (int)(uncertainc / Count * 100); else ViewBag.uncertainp = 0;
 
 
             await this.context.SaveChangesAsync();
@@ -445,20 +451,20 @@ namespace WebApplication2.Controllers
             this.ViewBag.regnumc = regnumc;
             this.ViewBag.positivec = positivec;
             this.ViewBag.negativec = negativec;
-            this.ViewBag.neutralc = neutralc;
+            this.ViewBag.neutralc = neutralc;                           
             this.ViewBag.uncertainc = uncertainc;
-            ViewBag.vkp = (int)(vkc / Count * 100);
-            ViewBag.riap = (int)(riac / Count * 100);
-            ViewBag.newsp = (int)(newsc / Count * 100);
-            ViewBag.twitp = (int)(twitc / Count * 100);
-            ViewBag.gazetap = (int)(gazetac / Count * 100);
-            ViewBag.vestip = (int)(vestic / Count * 100);
-            ViewBag.profp = (int)(profc / Count * 100);
-            ViewBag.regnump = (int)(regnumc / Count * 100);
-            ViewBag.positivep = (int)(positivec / Count * 100);
-            ViewBag.negativep = (int)(negativec / Count * 100);
-            ViewBag.neutralp = (int)(neutralc / Count * 100);
-            ViewBag.uncertainp = (int)(uncertainc / Count * 100);
+            if (vkc > 0) ViewBag.vkp = (int) (vkc / Count * 100); else ViewBag.vkp=0;
+            if (riac > 0) ViewBag.riap = (int)(riac / Count * 100); else ViewBag.riap = 0;
+            if (newsc > 0) ViewBag.newsp = (int)(newsc / Count * 100); else ViewBag.newsp = 0;
+            if (twitc > 0) ViewBag.twitp = (int)(twitc / Count * 100); else ViewBag.twitp = 0;
+            if (gazetac > 0) ViewBag.gazetap = (int)(gazetac / Count * 100); else ViewBag.gazetap = 0;
+            if (vestic > 0) ViewBag.vestip = (int)(vestic / Count * 100); else ViewBag.vestip = 0;
+            if (profc > 0) ViewBag.profp = (int)(profc / Count * 100); else ViewBag.profp = 0;
+            if (regnumc > 0) ViewBag.regnump = (int)(regnumc / Count * 100); else ViewBag.regnump = 0;
+            if (positivec > 0) ViewBag.positivep = (int)(positivec / Count * 100); else ViewBag.positivep = 0;
+            if (negativec > 0) ViewBag.negativep = (int)(negativec / Count * 100); else ViewBag.negativep = 0;
+            if (neutralc > 0) ViewBag.neutralp = (int)(neutralc / Count * 100); else ViewBag.neutralp = 0;
+            if (uncertainc > 0) ViewBag.uncertainp = (int)(uncertainc / Count * 100); else ViewBag.uncertainp = 0;
 
             return this.View("List", new List
             {
